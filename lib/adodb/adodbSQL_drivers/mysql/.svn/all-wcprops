@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/mysql
+END
+mysql_date_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/mysql/mysql_date_module.inc
+END
+mysql_transaction_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/mysql/mysql_transaction_module.inc
+END
+mysql_driver.inc
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/mysql/mysql_driver.inc
+END
+mysql_perfmon_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/mysql/mysql_perfmon_module.inc
+END
+mysql_meta_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/mysql/mysql_meta_module.inc
+END
+mysql_extend_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/mysql/mysql_extend_module.inc
+END
+mysql_datadict.inc
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/mysql/mysql_datadict.inc
+END

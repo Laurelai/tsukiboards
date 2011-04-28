@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/postgres64
+END
+postgres64_transaction_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/postgres64/postgres64_transaction_module.inc
+END
+postgres64_driver.inc
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/postgres64/postgres64_driver.inc
+END
+postgres64_meta_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/postgres64/postgres64_meta_module.inc
+END
+postgres64_extend_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/postgres64/postgres64_extend_module.inc
+END
+postgres64_datadict.inc
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/postgres64/postgres64_datadict.inc
+END
+postgres64_date_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/postgres64/postgres64_date_module.inc
+END

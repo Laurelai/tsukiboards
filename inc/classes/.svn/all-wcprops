@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/14/tsukiboards/trunk/inc/classes
+END
+robot.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/6/tsukiboards/trunk/inc/classes/robot.class.php
+END
+loadbalancer.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/3/tsukiboards/trunk/inc/classes/loadbalancer.class.php
+END
+rss.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/3/tsukiboards/trunk/inc/classes/rss.class.php
+END
+manage.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/14/tsukiboards/trunk/inc/classes/manage.class.php
+END
+parse.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/12/tsukiboards/trunk/inc/classes/parse.class.php
+END
+board-post.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3/tsukiboards/trunk/inc/classes/board-post.class.php
+END
+postedit.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/4/tsukiboards/trunk/inc/classes/postedit.class.php
+END
+svg.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/3/tsukiboards/trunk/inc/classes/svg.class.php
+END
+randword.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/3/tsukiboards/trunk/inc/classes/randword.class.php
+END
+bans.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/3/tsukiboards/trunk/inc/classes/bans.class.php
+END
+posting.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3/tsukiboards/trunk/inc/classes/posting.class.php
+END
+menu.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/3/tsukiboards/trunk/inc/classes/menu.class.php
+END
+upload.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/3/tsukiboards/trunk/inc/classes/upload.class.php
+END

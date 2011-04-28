@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/3/tsukiboards/trunk/inc/func
+END
+custom.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/3/tsukiboards/trunk/inc/func/custom.php
+END
+encryption.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/3/tsukiboards/trunk/inc/func/encryption.php
+END
+validation.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/3/tsukiboards/trunk/inc/func/validation.php
+END
+misc.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/3/tsukiboards/trunk/inc/func/misc.php
+END
+directories.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/3/tsukiboards/trunk/inc/func/directories.php
+END
+pages.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/3/tsukiboards/trunk/inc/func/pages.php
+END
+paths.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/3/tsukiboards/trunk/inc/func/paths.php
+END
+calculations.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/3/tsukiboards/trunk/inc/func/calculations.php
+END
+stringformatting.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3/tsukiboards/trunk/inc/func/stringformatting.php
+END
+numberformatting.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3/tsukiboards/trunk/inc/func/numberformatting.php
+END
+apc.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/3/tsukiboards/trunk/inc/func/apc.php
+END
+module.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/3/tsukiboards/trunk/inc/func/module.php
+END
+fetching.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/3/tsukiboards/trunk/inc/func/fetching.php
+END
+posts.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/3/tsukiboards/trunk/inc/func/posts.php
+END

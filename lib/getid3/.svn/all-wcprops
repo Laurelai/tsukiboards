@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/3/tsukiboards/trunk/lib/getid3
+END
+getid3.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/3/tsukiboards/trunk/lib/getid3/getid3.php
+END
+module.audio.mp3.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3/tsukiboards/trunk/lib/getid3/module.audio.mp3.php
+END
+module.tag.id3v1.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3/tsukiboards/trunk/lib/getid3/module.tag.id3v1.php
+END
+getid3.lib.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/3/tsukiboards/trunk/lib/getid3/getid3.lib.php
+END
+module.tag.id3v2.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3/tsukiboards/trunk/lib/getid3/module.tag.id3v2.php
+END

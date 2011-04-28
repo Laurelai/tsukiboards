@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb
+END
+license.txt
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/license.txt
+END
+adodb.config.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodb.config.php
+END
+adodb-time.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodb-time.inc.php
+END
+adodb.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodb.inc.php
+END

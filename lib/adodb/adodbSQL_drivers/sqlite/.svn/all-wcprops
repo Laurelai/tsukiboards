@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/sqlite
+END
+sqlite_transaction_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/sqlite/sqlite_transaction_module.inc
+END
+sqlite_driver.inc
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/sqlite/sqlite_driver.inc
+END
+sqlite_meta_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/sqlite/sqlite_meta_module.inc
+END
+sqlite_extend_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/sqlite/sqlite_extend_module.inc
+END
+sqlite_datadict.inc
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/sqlite/sqlite_datadict.inc
+END
+sqlite_date_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/sqlite/sqlite_date_module.inc
+END

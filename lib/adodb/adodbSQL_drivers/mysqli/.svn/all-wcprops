@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/mysqli
+END
+mysqli_transaction_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/mysqli/mysqli_transaction_module.inc
+END
+mysqli_driver.inc
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/mysqli/mysqli_driver.inc
+END
+mysqli_meta_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/mysqli/mysqli_meta_module.inc
+END
+mysqli_perfmon_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/mysqli/mysqli_perfmon_module.inc
+END
+mysqli_extend_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/mysqli/mysqli_extend_module.inc
+END
+mysqli_datadict.inc
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/mysqli/mysqli_datadict.inc
+END
+mysqli_date_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/mysqli/mysqli_date_module.inc
+END

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/postgres8
+END
+postgres8_transaction_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/postgres8/postgres8_transaction_module.inc
+END
+postgres8_driver.inc
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/postgres8/postgres8_driver.inc
+END
+postgres8_meta_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/postgres8/postgres8_meta_module.inc
+END
+postgres8_extend_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/postgres8/postgres8_extend_module.inc
+END
+postgres8_datadict.inc
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/postgres8/postgres8_datadict.inc
+END
+postgres8_date_module.inc
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/3/tsukiboards/trunk/lib/adodb/adodbSQL_drivers/postgres8/postgres8_date_module.inc
+END

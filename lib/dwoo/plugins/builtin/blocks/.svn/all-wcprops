@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks
+END
+block.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/block.php
+END
+textformat.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/textformat.php
+END
+if.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/if.php
+END
+forelse.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/forelse.php
+END
+smartyinterface.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/smartyinterface.php
+END
+strip.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/strip.php
+END
+capture.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/capture.php
+END
+section.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/section.php
+END
+topLevelBlock.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/topLevelBlock.php
+END
+foreach.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/foreach.php
+END
+elseif.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/elseif.php
+END
+loop.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/loop.php
+END
+with.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/with.php
+END
+foreachelse.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/foreachelse.php
+END
+a.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/a.php
+END
+dynamic.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/dynamic.php
+END
+withelse.php
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/withelse.php
+END
+for.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/for.php
+END
+else.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/else.php
+END
+auto_escape.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/3/tsukiboards/trunk/lib/dwoo/plugins/builtin/blocks/auto_escape.php
+END

@@ -1,0 +1,221 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/9/tsukiboards/trunk/dwoo/templates
+END
+txt_board_page.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/txt_board_page.tpl
+END
+img_header.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/img_header.tpl
+END
+oek_header.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/oek_header.tpl
+END
+banned.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/banned.tpl
+END
+error.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/error.tpl
+END
+postedit.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/4/tsukiboards/trunk/dwoo/templates/postedit.tpl
+END
+txt_post_box.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/txt_post_box.tpl
+END
+txt_footer.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/txt_footer.tpl
+END
+txt_reply_header.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/txt_reply_header.tpl
+END
+upl_board_page.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/upl_board_page.tpl
+END
+menu.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/menu.tpl
+END
+txt_thread.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/txt_thread.tpl
+END
+rss_mod.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/rss_mod.tpl
+END
+news.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/news.tpl
+END
+upl_post_box.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/upl_post_box.tpl
+END
+rss_board.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/rss_board.tpl
+END
+upl_footer.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/upl_footer.tpl
+END
+img_board_page.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/4/tsukiboards/trunk/dwoo/templates/img_board_page.tpl
+END
+oek_board_page.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/oek_board_page.tpl
+END
+upl_reply_header.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/upl_reply_header.tpl
+END
+global_board_footer.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/global_board_footer.tpl
+END
+upl_thread.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/upl_thread.tpl
+END
+txt_header.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/txt_header.tpl
+END
+manage.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/9/tsukiboards/trunk/dwoo/templates/manage.tpl
+END
+img_post_box.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/img_post_box.tpl
+END
+img_footer.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/img_footer.tpl
+END
+oek_post_box.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/oek_post_box.tpl
+END
+oek_footer.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/oek_footer.tpl
+END
+img_reply_header.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/img_reply_header.tpl
+END
+oek_reply_header.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/oek_reply_header.tpl
+END
+txt_threadlist.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/txt_threadlist.tpl
+END
+img_thread.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/4/tsukiboards/trunk/dwoo/templates/img_thread.tpl
+END
+oek_thread.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/oek_thread.tpl
+END
+upl_header.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/upl_header.tpl
+END
+manage_menu.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/manage_menu.tpl
+END
+global_board_header.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/3/tsukiboards/trunk/dwoo/templates/global_board_header.tpl
+END
