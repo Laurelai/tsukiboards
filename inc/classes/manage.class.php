@@ -588,7 +588,7 @@ class Manage {
 	}
 	
 		function faq() {
-		global $tpl_page;
+		global $tc_db, $tpl_page;
 		$this->AdministratorsOnly();
 		$faq = KU_ROOTDIR . 'faq.php';
 		if (!empty($_POST['niggers'])) {
@@ -1259,6 +1259,7 @@ class Manage {
 					$output .= sprintf(_gettext('Are you absolutely sure you want to delete %s?'),'/'. $board_dir . '/') .
 					'<br />
 					<form action="manage_page.php?action=adddelboard" method="post">
+          <input type="hidden" name="token" value="' . $_SESSION['token'] . '" />
 					<input type="hidden" name="del" id="del" value="del" />
 					<input type="hidden" name="directory" id="directory" value="'. $dir . '" />
 					<input type="hidden" name="confirmation" id="confirmation" value="yes" />
@@ -4335,3 +4336,4 @@ print "</table>";
 }
 }
 ?>
+
