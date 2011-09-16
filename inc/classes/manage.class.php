@@ -3087,7 +3087,7 @@ class Manage {
 			$tc_db->Execute("DELETE FROM `".KU_DBPREFIX."rs_links` WHERE `id` = ".$tc_db->qstr($_POST['del'])." LIMIT 1");
 			$tpl_page .="Download ". $_POST['del'] . " removed.";
 		} else {
-			$tpl_page .="<form action='https://manage.hurr.ca/manage_page.php?action=del_rs' method='POST'>
+			$tpl_page .="<form action='http://oneechan.org/manage_page.php?action=del_rs' method='POST'>
 			<input name='del' width='20' type='text'><input type='submit' value='Delete Post'>";
 		}
 	}
@@ -4269,18 +4269,18 @@ print "</table>";
 	function chanspambl() {
 	/*
 	*	Chan Spam Blacklist
-	*	http://blacklist.hurr.ca/
+	*	http://blacklist.oneechan.org/
 	*
 	*	This function will provide a page to add to the chan spam blacklist, and search for IP's already entered.
 	*/
 		global $tpl_page;
 		$tpl_page .= '<h2>'. _gettext('Search Chan Spam Blacklist') .'</h2> Search for records of an IP address in the chan spam blacklist.<br />'. "\n" .
-					'<form action="http://blacklist.hurr.ca/results.php" method="post">'. "\n" .
+					'<form action="http://blacklist.oneechan.org/results.php" method="post">'. "\n" .
 					'<input type="text" name="ip">' . "\n" .
 					'<input type="submit" />'. "\n" .
 					'</form><br /><br /><br />'. "\n" .
 					'<h2>Add Blacklist Entry</h2> Add an entry to the chan spam blacklist.<br />'. "\n" .
-					'<form action="http://blacklist.hurr.ca/add.php" method="post">'. "\n" .
+					'<form action="http://blacklist.oneechan.org/add.php" method="post">'. "\n" .
 					'<table><tr><td width="70">IP Address</td><td width="95">BL Type</td><td>Comments</td><td>Spam Content</td><td width="45">&nbsp;</td></tr>'. "\n" .
 					'<tr><td><input type="text" name="ip"></td><td>'. "\n" .
 					'<select name="type"><option value="Spam">Spam</option><option value="CP">CP</option><option value="Ban Evasion">Ban Evasion</option><option value="Raid/Invasion">Raid/Invasion</option><option value="Shitposting">Shitposting</option><option value="Site Attack">Site Attack</option><option value="NSFW-in-SFW">NSFW-in-SFW</option><option value="Abuse">Other Abuse</option></select></td>'. "\n" .
