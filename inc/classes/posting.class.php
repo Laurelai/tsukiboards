@@ -128,10 +128,58 @@ class Posting {
 
 		/* If the board has captcha's enabled... */
 		if ($board_class->board['enablecaptcha'] == 1) {
-			/* Check if they entered the correct code. If not... */
-			if ($_SESSION['security_code'] != strtolower($_POST['captcha']) || empty($_SESSION['security_code'])) {
-				/* Kill the script, stopping the posting process */
-				exitWithErrorPage(_gettext('Incorrect captcha entered.'));
+			if ($board_class->board['type'] == 1 && $_POST['replythread']) {
+
+				// RH - N.B. this code is not active on "normal" imageboards, not sure when it is?
+				/* Check if they entered the correct code. If not... */
+				if ($_SESSION['security_code'] != strtolower($_POST['captcha']) || empty($_SESSION['security_code'])) {
+				 	/* Kill the script, stopping the posting process */
+			 		exitWithErrorPage(_gettext('Incorrect captcha entered.'));
+				}
+
+			}
+			else {
+				// RH check faptcha words instead
+				$captchaPassed = False;
+				$captchaInput = strtolower($_POST['captcha']);			// get user's captcha answer, lowercase
+				$captchaInput = preg_replace( '/\s/', ' ', $captchaInput );	// ensure whitespace delimiters are a single space
+				$words = explode(" ", $captchaInput, 5);			// max 5 input words (sensible limit? 5*8 worst-case complexity)
+
+				foreach($_SESSION['faptcha_answers'] as $faptchaAnswerWord)	// For each valid faptcha answer word
+				{
+					foreach( $words as $inputFaptchaWord )		// Check each word user entered
+					{
+						if( $inputFaptchaWord == $faptchaAnswerWord )
+							$captchaPassed = True;		// if a word matches, they pass
+					}
+				}
+				if( !$captchaPassed )
+				{
+			 		exitWithErrorPage(_gettext('Incorrect faptcha entered.'));
+				}
+				else
+				{
+					session_unset();	// Kill their session upon success. Should stop session reuse attack.
+					session_destroy();
+				}
+
+				
+				/*
+				// RH - temporarily disabled reCAPTCHA
+				require_once(KU_ROOTDIR.'recaptchalib.php');
+				$privatekey = "6LdVg8YSAAAAALayugP2r148EEQAogHPfQOSYow-";
+
+				// was there a reCAPTCHA response?
+				$resp = recaptcha_check_answer ($privatekey, 
+					$_SERVER["REMOTE_ADDR"], 
+					$_POST["recaptcha_challenge_field"], 
+					$_POST["recaptcha_response_field"]
+				); 
+				if (!$resp->is_valid) {
+					// Show error and give user opportunity to try again.
+					exitWithErrorPage(_gettext('Incorrect captcha entered.'));
+				}
+				*/
 			}
 		}
 	}
