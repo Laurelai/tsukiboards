@@ -31,6 +31,13 @@
 	</tr>
 	{if $board.enablecaptcha eq 1}
 		<tr>
+			<td class="postblock">{$faptcha_image}</td>
+			<td colspan="2">{$faptcha_input}</td>
+		</tr>
+
+	{*
+         * RH - commented this
+		<tr>
 			<td class="postblock'">
 				<a href="#" onclick="javascript:document.getElementById('captchaimage').src = '{%KU_CGIPATH}/captcha.php?' + Math.random();return false;"><img id="captchaimage" src="{%KU_CGIPATH}/captcha.php" border="0" width="90" height="25" alt="Captcha image"></a>
 			</td>
@@ -38,6 +45,7 @@
 				<input type="text" name="captcha" size="28" maxlength="10" accesskey="c" />
 			</td>
 		</tr>
+	*}
 	{/if}
 	<tr>
 		<td class="postblock">

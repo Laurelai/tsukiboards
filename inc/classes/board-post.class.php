@@ -191,8 +191,13 @@ class Board {
 				} else {
 					$replycount = $tc_db->GetAll("SELECT COUNT(`id`) AS replies, SUM(CASE WHEN `file_md5` = '' THEN 0 ELSE 1 END) AS files FROM `" . KU_DBPREFIX . "posts` WHERE `boardid` = " . $this->board['id']."  AND `parentid` = ".$thread['id']." AND `is_deleted` = 0 AND `id` NOT IN (" . $omitids . ")");
 				}
-				$newposts[$k][0]['replies'] = $replycount[0][0];
-				$newposts[$k][0]['images'] = (isset($replycount[0][1]) ? $replycount[0][1] : '');
+				// Workaround for upload boards
+				if ($this->board['type'] == 3) {
+					$newposts[$k]['replies'] = $replycount[0][0];
+				} else {
+					$newposts[$k][0]['replies'] = $replycount[0][0];
+					$newposts[$k][0]['images'] = (isset($replycount[0][1]) ? $replycount[0][1] : '');
+				}
 			}
 			if ($this->board['type'] == 0 && !isset($embeds)) {
 				$embeds = $tc_db->GetAll("SELECT * FROM `" . KU_DBPREFIX . "embeds`");
@@ -208,6 +213,7 @@ class Board {
 			}
 			$this->dwoo_data->assign('posts', $newposts);
 			$this->dwoo_data->assign('file_path', getCLBoardPath($this->board['name'], $this->board['loadbalanceurl_formatted'], ''));
+
 			$content = $this->dwoo->get(KU_TEMPLATEDIR . '/' . $this->board['text_readable'] . '_board_page.tpl', $this->dwoo_data);
 			$footer = $this->Footer(false, (microtime_float() - $executiontime_start_page), (($this->board['type'] == 1) ? (true) : (false)));
 			$content = $header.$postbox.$content.$footer;
@@ -685,6 +691,20 @@ class Board {
 		if ($this->board['type'] == 2 && $replythread > 0) {
 			$oekposts = $tc_db->GetAll("SELECT `id` FROM `" . KU_DBPREFIX."posts` WHERE `boardid` = " . $this->board['id']." AND (`id` = ".$replythread." OR `parentid` = ".$replythread.") AND `file` != '' AND `file` != 'removed' AND `file_type` IN ('jpg', 'gif', 'png') AND `IS_DELETED` = 0 ORDER BY `parentid` ASC, `timestamp` ASC");
 			$this->dwoo_data->assign('oekposts', $oekposts);
+		}
+		if ($this->board['enablecaptcha'] ==  1)
+		{
+			// RH - Changed this, embed our faptcha instead
+			//	require_once(KU_ROOTDIR.'recaptchalib.php');
+			//	$publickey = "6LdVg8YSAAAAAOhqx0eFT1Pi49fOavnYgy7e-lTO";
+			//	$this->dwoo_data->assign('recaptcha', recaptcha_get_html($publickey));
+
+			// RH - Textbox to type the faptcha answer into = "captcha", calling it this reuses existing validation JS
+			//      Likewise we call the image 'captchaimage' as before
+			$faptcha_image = '<a href="#" onclick="javascript:document.getElementById(\'captchaimage\').src = \''. KU_CGIPATH . '/faptcha.php?\' + Math.random();return false;"> <IMG ID="captchaimage" SRC="'. KU_WEBFOLDER .'faptcha.php" border="0" alt="Click for a new captcha" title="Click for a new captcha"> </A>';
+			$faptcha_input = '<BR><input type="text" name="captcha" title="Enter character\'s name (common nicknames accepted)" size="28" maxlength="75" accesskey="c" />';
+			$this->dwoo_data->assign('faptcha_image', $faptcha_image);	// TODO was 'recaptcha', should prob rename this var since oneechan codebase doesn't have reCAPTCHA currently
+			$this->dwoo_data->assign('faptcha_input', $faptcha_input);	// input textbox
 		}
 		if(($this->board['type'] == 1 && $replythread == 0) || $this->board['type'] != 1) {
 			$postbox .= $this->dwoo->get(KU_TEMPLATEDIR . '/' . $this->board['text_readable'] . '_post_box.tpl', $this->dwoo_data);
