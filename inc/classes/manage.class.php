@@ -12,6 +12,14 @@
  * Manage functions, along with the pages available
  * +------------------------------------------------------------------------------+
  */
+
+
+
+
+
+
+
+
 class Manage {
 
 	/* Show the header of the manage page */
@@ -3285,17 +3293,17 @@ class Manage {
 								
 							foreach($results AS $line) {
 								$tc_db->Execute("UPDATE `".KU_DBPREFIX."posts` SET `message` = ".$tc_db->qstr($line['message'] . $ban_msg)." WHERE `boardid` = " . $tc_db->qstr($ban_board_id) . " AND `id` = ".$tc_db->qstr($postids[$i]));
-								echo $ban_msg . ' Post ' . $i;
+								
 								clearPostCache($postids[$i], $ban_board_id);
 								if ($line['parentid']==0) {
 									if (!in_array($postids, $regenerated)) {
 										$regenerated[] = $postids[$i];
-										echo 'Line 3368';
+										
 									}
 								} else {
 									if (!in_array($line['parentid'], $regenerated)) {
 										$regenerated[] = $line['parentid'];
-										echo 'Line 3373';
+										
 									}
 								}
 							}
