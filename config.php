@@ -198,9 +198,11 @@ if (!$cache_loaded) {
 		$cf['ROBOT_MUTE_HOUR'] = 6;				// Time in hours after which the mutes expire
 		$cf['ROBOT_MUTE_MULTIPLIER'] = 2;		// Multiplier for each mute
 		$cf['ROBOT_BOARD'] = '';				// What board should use the robot (currently only 1 board because PHP is derp)
-		
+			
+		$cf['TSUKI_BANREASONS'] = serialize(array("Porn Spam" => "Porn Spam", "Spam" => "Spam", "CP" => "Child Pornography", "IC" => "Illegal Content", "Proxy" => "Proxy"));
+			
 	// Post-configuration actions, don't modify these
-		$cf['KU_VERSION']    = '0.9';
+		$cf['KU_VERSION']    = '0.9.3';
 		$cf['KU_TAGS']       = serialize($cf['KU_TAGS']);
 		$cf['KU_TRIPS']      = serialize($cf['KU_TRIPS']);
 		$cf['KU_LINELENGTH'] = $cf['KU_LINELENGTH'] * 15;

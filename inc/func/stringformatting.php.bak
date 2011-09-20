@@ -176,18 +176,6 @@ function calculateNameAndTripcode($post_name) {
 	return $post_name;
 }
 
-function formatDisplayName($name, $tripcode, $anon = 'Anonymous') {
-
-	if (empty($name))
-		return $anon;
-		
-	if (empty($tripcode))
-		return $name;
-	else
-		return $name . '!' . $tripcode;
-
-}
-
 /**
  * Format a long message to be shortened if it exceeds the allowed length on a page
  *
@@ -197,18 +185,18 @@ function formatDisplayName($name, $tripcode, $anon = 'Anonymous') {
  * @param boolean $page Is rendering for a page
  * @return string The formatted message
  */
-function formatLongMessage($message, $board, $threadid, $page, $maxLines = 15, $maxLength = KU_LINELENGTH) {
+function formatLongMessage($message, $board, $threadid, $page) {
 	$output = '';
-	if ((strlen($message) > $maxLength || count(explode('<br />', $message)) > $maxLines) && $page) {
+	if ((strlen($message) > KU_LINELENGTH || count(explode('<br />', $message)) > 15) && $page) {
 		$message_exploded = explode('<br />', $message);
 		$message_shortened = '';
-		for ($i = 0; $i < $maxLines; $i++) {
+		for ($i = 0; $i <= 14; $i++) {
 			if (isset($message_exploded[$i])) {
 				$message_shortened .= $message_exploded[$i] . '<br />';
 			}
 		}
-		if (strlen($message_shortened) > $maxLength) {
-			$message_shortened = substr($message_shortened, 0, $maxLength);
+		if (strlen($message_shortened) > KU_LINELENGTH) {
+			$message_shortened = substr($message_shortened, 0, KU_LINELENGTH);
 		}
 		$message_shortened = closeOpenTags($message_shortened);
 		
@@ -325,11 +313,5 @@ function processPost($id, $newthreadid, $oldthreadid, $board_from, $board_to, $b
 			$tc_db->GetOne("UPDATE " . KU_DBPREFIX . "posts SET `message` = " . $tc_db->qstr($message) . " WHERE `boardid` = " . $boardid . " AND `id` = " . $id);
 		}
 	}
-}
-
-function getPostUrl($post_board, $post_thread_start_id, $post_id) {
-
-	return KU_BOARDSFOLDER . $post_board . '/res/' . $post_thread_start_id . '.html#' . $post_id;
-
 }
 ?>
