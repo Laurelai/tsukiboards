@@ -4,7 +4,7 @@ require_once 'config.php';
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<title>Recent Posts on Mikuchan</title>
+	<title>Recent Posts on Oneechan</title>
 	<link rel="shortcut icon" href="<?php echo KU_WEBPATH; ?>/favicon.ico" />
 </head>
 <?php
