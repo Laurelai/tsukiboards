@@ -88,6 +88,27 @@ $bans_class->BanCheck($_SERVER['REMOTE_ADDR'], $board_class->board['name']);
 
 // }}}
 
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// RH - Check faptcha attempts, if they got >=10 wrong in the last 20 minutes then autoban them for 20 mins.
+//      Necessary because otherwise a spambot can just try every possible character until it gets a hit.
+//      This is ported from HydrogenFx - http://www.ohloh.net/p/hydrogenfx
+//
+if($board_class->board['enablecaptcha'] == 1)
+{
+	$results = $tc_db->GetAll("SELECT HIGH_PRIORITY `ip` FROM `" . KU_DBPREFIX . "faptcha_attempts` WHERE `ip` = '" . $_SERVER['REMOTE_ADDR'] . "' LIMIT 10");
+	if (count($results) > 9) 
+	{
+		$bans_class->BanUser($_SERVER['REMOTE_ADDR'], 'SERVER', 0, 1200, $_POST['board'], 'Spam bot', 500, 0, 1);
+		session_destroy();
+		exitWithErrorPage(_gettext('Spam bot (or CASUAL AS FUCK) detected. 20 minute timeout.'));
+	}
+}	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 $oekaki = $posting_class->CheckOekaki();
 $is_oekaki = empty($oekaki) ? false : true;
 /* Ensure that UTF-8 is used on some of the post variables */
@@ -100,6 +121,10 @@ if ($posting_class->CheckValidPost($is_oekaki)) {
 	$posting_class->CheckNewThreadTime();
 	$posting_class->CheckMessageLength();
 	$posting_class->CheckCaptcha();
+
+	// RH - from hydrogenfx - clear expired faptcha attempts (>20 mins ago)
+	$posting_class->ClearFaptchaAttempts();
+
 	$posting_class->CheckBannedHash();
 	$posting_class->CheckBlacklistedText();
 	$post_isreply = $posting_class->CheckIsReply();
@@ -488,3 +513,4 @@ if ($board_class->board['redirecttothread'] == 1 || $_POST['em'] == 'return' || 
 	do_redirect(KU_BOARDSPATH . '/' . $board_class->board['name'] . '/', true, $imagefile_name);
 }
 ?>
+

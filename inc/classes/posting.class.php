@@ -124,7 +124,7 @@ class Posting {
 	}
 
 	function CheckCaptcha() {
-		global $board_class;
+		global $tc_db, $board_class;
 
 		/* If the board has captcha's enabled... */
 		if ($board_class->board['enablecaptcha'] == 1) {
@@ -155,6 +155,10 @@ class Posting {
 				}
 				if( !$captchaPassed )
 				{
+					// RH - last 20 mins of faptcha attempts are tracked, too many wrong in that period = 20 minute ban ...
+					//      "Ported" from Hydrogenfx.
+					$tc_db->Execute("INSERT HIGH_PRIORITY INTO `" . KU_DBPREFIX . "faptcha_attempts` ( `ip` , `timestamp` ) VALUES ( '" . $_SERVER['REMOTE_ADDR'] . "' , '" . time() . "' )");
+
 			 		exitWithErrorPage(_gettext('Incorrect faptcha entered.'));
 				}
 				else
@@ -184,6 +188,17 @@ class Posting {
 		}
 	}
 
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// RH - Clear timed-out faptcha attempts, effect of this should be that it only holds the last ~20 mins worth
+	//	"Ported" from Hydrogenfx
+	function ClearFaptchaAttempts() {
+		global $tc_db, $board_class;
+		$tc_db->Execute("DELETE FROM `" . KU_DBPREFIX . "faptcha_attempts` WHERE `timestamp` < '" . (time() - 1200) . "'");
+	}
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 	function CheckBannedHash() {
 		global $tc_db, $board_class, $bans_class;
 
@@ -199,6 +214,7 @@ class Posting {
 			}
 		}
 	}
+
 
 	function CheckIsReply() {
 		global $tc_db, $board_class;
