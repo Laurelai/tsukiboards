@@ -126,9 +126,9 @@ class Posting {
 	function CheckCaptcha() {
 		global $tc_db, $board_class;
 
-		// RH - if they are an admin or mod, and using their "Mod" posting password, then bypass faptcha (issue #4)
+		// RH - if they are an admin, mod or VIP (currently disabled) and using their "Mod" posting password, then bypass faptcha (issue #4)
 		list($authority, $flags) = $this->GetUserAuthority();
-		if( 1 == $authority || 2 == $authority )
+		if( 1 == $authority || 2 == $authority || 3 == $authority )
 		{
 			return;
 		}
