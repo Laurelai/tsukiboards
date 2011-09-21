@@ -126,6 +126,13 @@ class Posting {
 	function CheckCaptcha() {
 		global $tc_db, $board_class;
 
+		// RH - if they are an admin or mod, and using their "Mod" posting password, then bypass faptcha (issue #4)
+		list($authority, $flags) = $this->GetUserAuthority();
+		if( 1 == $authority || 2 == $authority )
+		{
+			return;
+		}
+
 		/* If the board has captcha's enabled... */
 		if ($board_class->board['enablecaptcha'] == 1) {
 			if ($board_class->board['type'] == 1 && $_POST['replythread']) {
