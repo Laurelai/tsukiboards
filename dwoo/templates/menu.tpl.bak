@@ -20,7 +20,6 @@
 <script type="text/javascript" src="{%KU_WEBFOLDER}lib/javascript/gettext.js"></script>
 <script type="text/javascript" src="{%KU_WEBFOLDER}lib/javascript/menu.js"></script>
 <script type="text/javascript" src="{%KU_WEBFOLDER}lib/javascript/kusaba.js"></script>
-<script type="text/javascript" src="{%KU_WEBFOLDER}lib/javascript/jquery-1.6.2.min.js"></script>
 <script type="text/javascript"><!--
 
 {if $showdirs eq 0 && $files.0 neq $files.1 }

@@ -3,7 +3,7 @@
 <head>
 <title>{t}Manage Boards{/t}</title>
 <!--<link rel="stylesheet" type="text/css" href="{$ku_boardspath}/css/manage.css" title="Manage">-->
-<script language="javascript" type="text/javascript" src="{$ku_boardspath}/lib/javascript/jquery-1.6.2.min.js"></script>
+<script language="javascript" type="text/javascript" src="{$ku_boardspath}/lib/javascript/jquery-1.5.min.js"></script>
 <script type="text/javascript" src="{$ku_boardspath}/lib/markitup/jquery.markitup.js"></script>
 <script type="text/javascript" src="{$ku_boardspath}/lib/markitup/sets/html/set.js"></script>
 <link rel="stylesheet" type="text/css" href="{$ku_boardspath}/lib/markitup/skins/markitup/style.css" />

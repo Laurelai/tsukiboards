@@ -388,7 +388,7 @@ function delandbanlinks()
           onSuccess: function (a)
           {
             ipaddr = a.responseText.split("=") || "what are you doing get out you don't even fit";
-            span = document.getElementById(ipaddr[0].replace(/^\s+/,""));
+            span = document.getElementById(ipaddr[0]);
             span.innerHTML = "[IP: " + ipaddr[1] + " <a href=\"" + ku_boardspath + "/manage_page.php?action=deletepostsbyip&ip=" + ipaddr[1] + "\" title=\"" + _('Delete all posts by this IP') + "\">D</a> / <a href=\"" + ku_boardspath + "/manage_page.php?action=ipsearch&ip=" + ipaddr[1] + "\" title=\"" + _('Search for posts with this IP') + "\">S</a>] " + span.innerHTML
           },
           onFailure: function ()

@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /404/
+Disallow: /css/
+Disallow: /dwoo/
+Disallow: /inc/
+Disallow: /kusabaoek/
+Disallow: /lib/
+Disallow: /OTHER/

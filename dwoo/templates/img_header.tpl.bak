@@ -27,7 +27,6 @@
 {/if}
 //--></script>
 <script type="text/javascript" src="{%KU_WEBPATH}/lib/javascript/kusaba.js"></script>
-<script type="text/javascript" src="{%KU_WEBFOLDER}lib/javascript/jquery-1.6.2.min.js"></script>
 <script type="text/javascript"><!--
 	var hiddenthreads = getCookie('hiddenthreads').split('!');
 //--></script>

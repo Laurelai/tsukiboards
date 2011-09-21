@@ -23,6 +23,7 @@
 
 <table border="0"><tr><td class="newsCell" valign="top">	
 	<div class="menu" id="topmenu">
+
 		{strip}<ul>
 			<li class="{if $dwoo.get.p eq ''}current {else}tab {/if}first">{if $dwoo.get.p neq ''}<a href="{$ku_webpath}news.php">{/if}{t}Home{/t}{if $dwoo.get.p neq ''}</a>{/if}</li>
 			<li class="{if $dwoo.get.p eq 'news'}current {else}tab {/if}">{if $dwoo.get.p neq 'news'}<a href="{$ku_webpath}news.php?p=news">{/if}{t}News{/t}{if $dwoo.get.p neq 'news'}</a>{/if}</li>

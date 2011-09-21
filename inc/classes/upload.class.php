@@ -216,7 +216,12 @@ class Upload {
 							/* Otherwise, use this script alone */
 							} else {
 								$this->file_location = KU_BOARDSDIR . $board_class->board['name'] . '/src/' . $this->file_name . $this->file_type;
-
+								
+								if (file_exists($this->file_location)) {
+									exitWithErrorPage(_gettext('A file by that name already exists'));
+									die();
+								}
+								
 								if($this->file_type == '.mp3') {
 									require_once(KU_ROOTDIR . 'lib/getid3/getid3.php');
 
