@@ -25,10 +25,10 @@ closedir($dh);
 $NumFiles = count($files);
 if( $NumFiles <= 0 )
 {
-	die("No faptcha images found! Please place them in faptchas/");  // at least 2 are needed for it to work, actually ...
+	die("No faptcha images found! Please place them in faptchas/");
 }
 
-srand((double)microtime()*1000000);
+//srand((double)microtime()*1000000);	// RH - not necessary on PHP >=4.2.0, and it's bad for randomness to reseed
 $randnum = rand(0,$NumFiles - 1);
 $file = $dir . $files[$randnum];	
 $filename = $files[$randnum];
@@ -47,6 +47,10 @@ $_SESSION['faptcha_answers'] = $words;	// assign them to session variable
 if( ".png" == substr( $file, -4) )
 {
 	$image = imagecreatefrompng($file);
+	if( FALSE == $image )
+	{
+		error_log('Faptcha serve failed, ' . $file . 'is not a valid PNG!');	// this has happened ... identify such cases via error log
+	}
 	$image = ImageMangle( $image );
 	header('Content-Type: image/png');	
 	imagepng($image);
@@ -54,6 +58,10 @@ if( ".png" == substr( $file, -4) )
 else if( ".jpg" == substr( $file, -4) || ".jpeg" == substr( $file, -5) )
 {
 	$image = imagecreatefromjpeg($file);
+	if( FALSE == $image )
+	{
+		error_log('Faptcha serve failed, ' . $file . 'is not a valid JPEG!');
+	}
 	$image = ImageMangle( $image );
 	header('Content-Type: image/jpeg');	
 	imagejpeg($image);
@@ -71,7 +79,42 @@ function ImageMangle( $image )
 	$noise_color = imagecolorallocate($image, rand(0,255), rand(0,255), rand(0,255));
 	imageline($image, mt_rand(0,$width), mt_rand(0,$height), mt_rand(0,$width), mt_rand(0,$height), $noise_color);
 
+	// Randomly resize it a bit. Mostly an additional defence against a filesize matching attack.
+	// 5px seems to be enough to introduce useful variation without messing up the postbox layout or making it too small.
+	$resizePix = 0;
+	while( 0 == $resizePix )
+		$resizePix = rand(-5,5);
+	$image = ResizeImage( $image, $width, $height, $width+$resizePix, $height+$resizePix, FALSE );
+
 	return $image;
+}
+
+
+function ResizeImage( $image, $width, $height, $w, $h, $crop=FALSE ) 
+{
+    $r = $width / $height;
+    if ($crop) {
+        if ($width > $height) {
+            $width = ceil($width-($width*($r-$w/$h)));
+        } else {
+            $height = ceil($height-($height*($r-$w/$h)));
+        }
+        $newwidth = $w;
+        $newheight = $h;
+    } else {
+        if ($w/$h > $r) {
+            $newwidth = $h*$r;
+            $newheight = $h;
+        } else {
+            $newheight = $w/$r;
+            $newwidth = $w;
+        }
+    }
+    $src = $image; //imagecreatefromjpeg($file);
+    $dst = imagecreatetruecolor($newwidth, $newheight);
+    imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+    return $dst;
 }
 
 ?>
