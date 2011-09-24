@@ -49,7 +49,7 @@ if( ".png" == substr( $file, -4) )
 	$image = imagecreatefrompng($file);
 	if( FALSE == $image )
 	{
-		error_log('Faptcha serve failed, ' . $file . 'is not a valid PNG!');	// this has happened ... identify such cases via error log
+		error_log('Faptcha serve failed, ' . $file . ' is not a valid PNG!');	// this has happened ... identify such cases via error log
 	}
 	$image = ImageMangle( $image );
 	header('Content-Type: image/png');	
@@ -60,7 +60,7 @@ else if( ".jpg" == substr( $file, -4) || ".jpeg" == substr( $file, -5) )
 	$image = imagecreatefromjpeg($file);
 	if( FALSE == $image )
 	{
-		error_log('Faptcha serve failed, ' . $file . 'is not a valid JPEG!');
+		error_log('Faptcha serve failed, ' . $file . ' is not a valid JPEG!');
 	}
 	$image = ImageMangle( $image );
 	header('Content-Type: image/jpeg');	
@@ -110,7 +110,7 @@ function ResizeImage( $image, $width, $height, $w, $h, $crop=FALSE )
             $newwidth = $w;
         }
     }
-    $src = $image; //imagecreatefromjpeg($file);
+    $src = $image;
     $dst = imagecreatetruecolor($newwidth, $newheight);
     imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
 
@@ -118,6 +118,5 @@ function ResizeImage( $image, $width, $height, $w, $h, $crop=FALSE )
 }
 
 ?>
-
 
 
