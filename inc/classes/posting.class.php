@@ -39,7 +39,7 @@ class Posting {
 		global $tc_db, $board_class;
 
 		/* Get the timestamp of the last time a reply was made by this IP address */
-		$results = $tc_db->GetAll("SELECT MAX(timestamp) FROM `" . KU_DBPREFIX . "posts` WHERE `boardid` = " . $board_class->board['id'] . " AND `parentid` != 0 AND `ipmd5` = '" . md5($_SERVER['REMOTE_ADDR']) . "' AND `timestamp` > " . (time() - KU_REPLYDELAY));
+		$results = $tc_db->GetAll("SELECT MAX(timestamp) FROM `" . KU_DBPREFIX . "posts` WHERE `boardid` = " . $board_class->board['id'] . " AND `parentid` != 0 AND `ipmd5` = '" . md5(KU_SALT.$_SERVER['REMOTE_ADDR']) . "' AND `timestamp` > " . (time() - KU_REPLYDELAY));
 		/* If they have posted before and it was recorded... */
 		if (isset($result)) {
 		/* If the time was shorter than the minimum time distance */
@@ -53,7 +53,7 @@ class Posting {
 		global $tc_db, $board_class;
 
 		/* Get the timestamp of the last time a new thread was made by this IP address */
-		$result = $tc_db->GetOne("SELECT MAX(timestamp) FROM `" . KU_DBPREFIX . "posts` WHERE `boardid` = " . $board_class->board['id'] . " AND `parentid` = 0 AND `ipmd5` = '" . md5($_SERVER['REMOTE_ADDR']) . "' AND `timestamp` > " . (time() - KU_NEWTHREADDELAY));
+		$result = $tc_db->GetOne("SELECT MAX(timestamp) FROM `" . KU_DBPREFIX . "posts` WHERE `boardid` = " . $board_class->board['id'] . " AND `parentid` = 0 AND `ipmd5` = '" . md5(KU_SALT.$_SERVER['REMOTE_ADDR']) . "' AND `timestamp` > " . (time() - KU_NEWTHREADDELAY));
 		/* If they have posted before and it was recorded... */
 		if (isset($result)) {
 			/* If the time was shorter than the minimum time distance */

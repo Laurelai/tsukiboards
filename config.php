@@ -176,6 +176,7 @@ if (!$cache_loaded) {
 	// Misc config
 		$cf['KU_MODLOGDAYS']        = 7; // Days to keep modlog entries before removing them
 		$cf['KU_RANDOMSEED']        = 'ENTER RANDOM LETTERS/NUMBERS HERE'; // Type a bunch of random letters/numbers here, any large amount (35+ characters) will do
+		$cf['KU_SALT']		    = 'ENTER RANDOM LETTERS/NUMBERS HERE';  // Salt used for secure hashing of poster IDs from their IP (any random string)
 		$cf['KU_STATICMENU']        = false; // Whether or not to generate the menu files as static files, instead of linking to menu.php.  Enabling this will reduce load, however some users have had trouble with getting the files to generate
 		$cf['KU_GENERATEBOARDLIST'] = true; // Set to true to automatically make the board list which is displayed ad the top and bottom of the board pages, or false to use the boards.html file
 
@@ -198,11 +199,9 @@ if (!$cache_loaded) {
 		$cf['ROBOT_MUTE_HOUR'] = 6;				// Time in hours after which the mutes expire
 		$cf['ROBOT_MUTE_MULTIPLIER'] = 2;		// Multiplier for each mute
 		$cf['ROBOT_BOARD'] = '';				// What board should use the robot (currently only 1 board because PHP is derp)
-			
-		$cf['TSUKI_BANREASONS'] = serialize(array("Porn Spam" => "Porn Spam", "Spam" => "Spam", "CP" => "Child Pornography", "IC" => "Illegal Content", "Proxy" => "Proxy"));
-			
+		
 	// Post-configuration actions, don't modify these
-		$cf['KU_VERSION']    = '0.9.3';
+		$cf['KU_VERSION']    = '0.9';
 		$cf['KU_TAGS']       = serialize($cf['KU_TAGS']);
 		$cf['KU_TRIPS']      = serialize($cf['KU_TRIPS']);
 		$cf['KU_LINELENGTH'] = $cf['KU_LINELENGTH'] * 15;

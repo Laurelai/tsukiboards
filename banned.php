@@ -34,7 +34,7 @@ require KU_ROOTDIR . 'inc/classes/bans.class.php';
 $bans_class = new Bans();
 
 if (isset($_POST['appealmessage']) && KU_APPEAL != '') {
-	$results = $tc_db->GetAll("SELECT * FROM `".KU_DBPREFIX."banlist` WHERE `type` = '0' AND `ipmd5` = '" . md5($_SERVER['REMOTE_ADDR']) . "' AND `id` = " . $tc_db->qstr($_POST['banid']) . "LIMIT 1");
+	$results = $tc_db->GetAll("SELECT * FROM `".KU_DBPREFIX."banlist` WHERE `type` = '0' AND `ipmd5` = '" . md5(KU_SALT.$_SERVER['REMOTE_ADDR']) . "' AND `id` = " . $tc_db->qstr($_POST['banid']) . "LIMIT 1");
 	if (count($results)>0) {
 		foreach($results AS $line) {
 			if ($line['appealat'] > 0 && $line['appealat'] < time()) {
