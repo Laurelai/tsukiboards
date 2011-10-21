@@ -91,14 +91,14 @@ $bans_class->BanCheck($_SERVER['REMOTE_ADDR'], $board_class->board['name']);
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RH - Check faptcha attempts, if they got >=10 wrong in the last 20 minutes then autoban them for 20 mins.
+// RH - Check faptcha attempts, if they got too many wrong in the last 20 minutes then autoban them for 20 mins.
 //      Necessary because otherwise a spambot can just try every possible character until it gets a hit.
 //      This is ported from HydrogenFx - http://www.ohloh.net/p/hydrogenfx
 //
 if($board_class->board['enablecaptcha'] == 1)
 {
 	$results = $tc_db->GetAll("SELECT HIGH_PRIORITY `ip` FROM `" . KU_DBPREFIX . "faptcha_attempts` WHERE `ip` = '" . $_SERVER['REMOTE_ADDR'] . "' LIMIT 10");
-	if (count($results) > 9) 
+	if (count($results) > 7) // 21/10/11 - No complaints so far so reduced ban threshold from 10 wrong faptchas to 8
 	{
 		$bans_class->BanUser($_SERVER['REMOTE_ADDR'], 'SERVER', 0, 1200, $_POST['board'], 'Spam bot', 500, 0, 1);
 		session_destroy();
