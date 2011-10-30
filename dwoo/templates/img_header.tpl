@@ -26,8 +26,14 @@
 		var ispage = true;
 {/if}
 //--></script>
+<script type="text/javascript">
+// RH - Kusaba JS values, used for colour-cycling anchors
+kusaba = \{};
+kusaba.val = 0;
+kusaba.loopid;
+</script>
+<script type="text/javascript" src="{%KU_WEBFOLDER}lib/javascript/jquery-1.6.2.min.js"></script>  <!-- RH jQuery must be loaded first now since kusaba.js uses it -->
 <script type="text/javascript" src="{%KU_WEBPATH}/lib/javascript/kusaba.js"></script>
-<script type="text/javascript" src="{%KU_WEBFOLDER}lib/javascript/jquery-1.6.2.min.js"></script>
 <script type="text/javascript"><!--
 	var hiddenthreads = getCookie('hiddenthreads').split('!');
 //--></script>
