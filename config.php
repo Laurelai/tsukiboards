@@ -209,7 +209,8 @@ if (!$cache_loaded) {
 		$cf['TSUKI_BANREASONS'] = serialize(array("Porn Spam" => "Porn Spam", "Spam" => "Spam", "CP" => "Child Pornography", "IC" => "Illegal Content", "Proxy" => "Proxy"));
 
 	// Post-configuration actions, don't modify these
-		$cf['KU_VERSION']    = '0.9.3';
+	// Please make sure the correct revision number is labled, it makes me sad when it isn't. 
+		$cf['KU_VERSION']    = '42';
 		$cf['KU_TAGS']       = serialize($cf['KU_TAGS']);
 		$cf['KU_TRIPS']      = serialize($cf['KU_TRIPS']);
 		$cf['KU_LINELENGTH'] = $cf['KU_LINELENGTH'] * 15;
