@@ -1,9 +1,9 @@
-This is a fork of kusabaX
-
-arcNET uses core code from Kusaba X and Oneechan
-
-tsukihi.me kusabax.cultnet.net oneechan.org
-
+# ArcNet- A fork of the KusabaX imageboard.
+## About
+arcNET's core source code came from Kusaba X.
+## Contact/Links
+<http://tsukihi.me> <http://kusabax.cultnet.net> <http://oneechan.org> <http://314chan.org>
+## Licensing 
 arcNET is free software; you can redistribute it and/or modify it under the
 terms of the GNU General Public License as published by the Free Software
 Foundation; either version 2 of the License, or (at your option) any later
@@ -12,3 +12,4 @@ version.
 kusaba is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
