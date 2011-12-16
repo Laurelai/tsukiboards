@@ -43,8 +43,8 @@ require KU_ROOTDIR . 'inc/classes/board-post.class.php';
 
 $output = '';
 if ($_GET['board']) {
-	// RH - Get the board's ID and name
-	$results = $tc_db->GetAll("SELECT HIGH_PRIORITY `id`, `name` FROM `" . KU_DBPREFIX . "boards` WHERE `name` = " . $tc_db->qstr($_GET['board']) . "");
+	// RH - Get the board's ID and name. No longer at high priority (DoS concerns.)
+	$results = $tc_db->GetAll("SELECT `id`, `name` FROM `" . KU_DBPREFIX . "boards` WHERE `name` = " . $tc_db->qstr($_GET['board']) . "");
 	$boardid = $results[0][0];
 	$boardname = $results[0][1];
 }
