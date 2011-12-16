@@ -11,7 +11,7 @@
  * Foundation; either version 2 of the License, or (at your option) any later
  * version.
  *
- * kusaba is distributed in the hope that it will be useful, but WITHOUT ANY
+ * arcNET is distributed in the hope that it will be useful, but WITHOUT ANY
  * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
  * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
@@ -21,6 +21,7 @@
  *
  * credits to jmyeom for improving this
  *
+
  */
 /**
  * AJAX thread watch handler
@@ -42,6 +43,7 @@ require KU_ROOTDIR . 'inc/classes/board-post.class.php';
 
 $output = '';
 if ($_GET['board']) {
+	// RH - Get the board's ID and name
 	$results = $tc_db->GetAll("SELECT HIGH_PRIORITY `id`, `name` FROM `" . KU_DBPREFIX . "boards` WHERE `name` = " . $tc_db->qstr($_GET['board']) . "");
 	$boardid = $results[0][0];
 	$boardname = $results[0][1];
@@ -49,6 +51,11 @@ if ($_GET['board']) {
 if (isset($_GET['do'])) {
 	switch($_GET['do']) {
 	case 'addthread':
+		// RH - Fix for DoS weakness that previously an IP could watch an arbitrarily large number of thread ID's. Now limited to 10.
+		$watchCount = $tc_db->GetOne("SELECT COUNT(*) FROM `" . KU_DBPREFIX . "watchedthreads` WHERE `ip` = '" . $_SERVER['REMOTE_ADDR'] . "' AND `board` = " . $tc_db->qstr($_GET['board']) . "");
+		if( $watchCount > 10 )
+			die();
+
 		$viewing_thread_is_watched = $tc_db->GetOne("SELECT COUNT(*) FROM `" . KU_DBPREFIX . "watchedthreads` WHERE `ip` = '" . $_SERVER['REMOTE_ADDR'] . "' AND `board` = " . $tc_db->qstr($_GET['board']) . " AND `threadid` = " . $tc_db->qstr($_GET['threadid']) . "");
 		if ($viewing_thread_is_watched == 0) {
 			$newestreplyid = $tc_db->GetOne('SELECT `id` FROM `'.KU_DBPREFIX.'posts` WHERE `boardid` = ' . $boardid . ' AND `IS_DELETED` = 0 AND `parentid` = '.$tc_db->qstr($_GET['threadid']).' ORDER BY `id` DESC LIMIT 1');
