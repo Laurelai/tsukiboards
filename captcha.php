@@ -1,5 +1,11 @@
 <?php
-/*
+/**
+ * RH - Handle captcha.php requests appropriately depending on the CAPTCHA type we are using.
+ * Only reason we need this is for compatibility with dollchan extension tools.
+ * In future, if/when we add native thread watching and updating, we can probably drop this.
+ *
+ * @package kusaba
+ *
  * This file is part of arcNET
  *
  * arcNET uses core code from Kusaba X and Oneechan
@@ -18,18 +24,24 @@
  * You should have received a copy of the GNU General Public License along with
  * kusaba; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- *
- * credits to jmyeom for improving this
- *
  */
-/**
- * RH - Cheesy "redirector" of requests to the old captcha.php to faptcha.php
- * This should fix dollchan extension tools without user having to mod the script.
- *
- * @package kusaba
-*/
 
-include 'faptcha.php';
- 
+require 'config.php';
+
+if( KU_CAPTCHA_TYPE == 'faptcha' )
+{
+	include 'faptcha.php';
+}
+else if( KU_CAPTCHA_TYPE == 'recaptcha' )
+{
+	// RH - use reCAPTCHA challenge instead of the faptcha.
+	require_once(KU_ROOTDIR.'recaptchalib.php');
+	$publickey = "6LdVg8YSAAAAAOhqx0eFT1Pi49fOavnYgy7e-lTO";
+	echo recaptcha_get_html($publickey);
+}
+else
+{
+	die("Unrecognised CAPTCHA type set in config.php!");
+}
 ?>
 

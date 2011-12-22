@@ -208,6 +208,9 @@ if (!$cache_loaded) {
 		$cf['ROBOT_BOARD'] = '';				// What board should use the robot (currently only 1 board because PHP is derp)
 		$cf['TSUKI_BANREASONS'] = serialize(array("Porn Spam" => "Porn Spam", "Spam" => "Spam", "CP" => "Child Pornography", "IC" => "Illegal Content", "Proxy" => "Proxy"));
 
+	// Captcha / Faptcha options
+		$cf['KU_CAPTCHA_TYPE'] = 'faptcha';	// Set to 'recaptcha' for reCAPTCHA, or 'faptcha' for an image recognition challenge (default is anime characters)
+		
 	// Post-configuration actions, don't modify these
 	// Please make sure the correct revision number is labled, it makes me sad when it isn't. 
 		$cf['KU_VERSION']    = '42';

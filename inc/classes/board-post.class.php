@@ -694,17 +694,26 @@ class Board {
 		}
 		if ($this->board['enablecaptcha'] ==  1)
 		{
-			// RH - Changed this, embed our faptcha instead
-			//	require_once(KU_ROOTDIR.'recaptchalib.php');
-			//	$publickey = "6LdVg8YSAAAAAOhqx0eFT1Pi49fOavnYgy7e-lTO";
-			//	$this->dwoo_data->assign('recaptcha', recaptcha_get_html($publickey));
-
-			// RH - Textbox to type the faptcha answer into = "captcha", calling it this reuses existing validation JS
-			//      Likewise we call the image 'captchaimage' as before
-			$faptcha_image = '<a href="#" onclick="javascript:document.getElementById(\'captchaimage\').src = \''. KU_CGIPATH . '/faptcha.php?\' + Math.random();return false;"> <IMG ID="captchaimage" SRC="'. KU_WEBFOLDER .'faptcha.php" border="0" alt="Click for a new faptcha" title="Click for a new faptcha"> </A>';
-			$faptcha_input = '<BR><input type="text" name="captcha" title="Enter character\'s name (common nicknames accepted ... probably)" size="28" maxlength="75" accesskey="c" />';
-			$this->dwoo_data->assign('faptcha_image', $faptcha_image);	// the faptcha image
-			$this->dwoo_data->assign('faptcha_input', $faptcha_input);	// faptcha answer input textbox
+			if( KU_CAPTCHA_TYPE == 'recaptcha' )
+			{
+				// RH - use reCAPTCHA challenge instead of the faptcha
+				require_once(KU_ROOTDIR.'recaptchalib.php');
+				$publickey = "6LdVg8YSAAAAAOhqx0eFT1Pi49fOavnYgy7e-lTO";
+				$this->dwoo_data->assign('faptcha_input', recaptcha_get_html($publickey));  // Originally assigned to 'recaptcha', bit lazy doing this, maybe template can have both?
+			}
+			else if( KU_CAPTCHA_TYPE == 'faptcha' )
+			{
+				// RH - Textbox to type the faptcha answer into = "captcha", calling it this reuses existing validation JS
+				//      Likewise we call the image 'captchaimage' as before
+				$faptcha_image = '<a href="#" onclick="javascript:document.getElementById(\'captchaimage\').src = \''. KU_CGIPATH . '/faptcha.php?\' + Math.random();return false;"> <IMG ID="captchaimage" SRC="'. KU_WEBFOLDER .'faptcha.php" border="0" alt="Click for a new faptcha" title="Click for a new faptcha"> </A>';
+				$faptcha_input = '<BR><input type="text" name="captcha" title="Enter character\'s name (common nicknames accepted ... probably)" size="28" maxlength="75" accesskey="c" />';
+				$this->dwoo_data->assign('faptcha_image', $faptcha_image);	// the faptcha image
+				$this->dwoo_data->assign('faptcha_input', $faptcha_input);	// faptcha answer input textbox
+			}
+			else
+			{
+				die("ERROR: Unrecognised captcha type set in config.php! (KU_CAPTCHA_TYPE)");
+			}
 		}
 		if(($this->board['type'] == 1 && $replythread == 0) || $this->board['type'] != 1) {
 			$postbox .= $this->dwoo->get(KU_TEMPLATEDIR . '/' . $this->board['text_readable'] . '_post_box.tpl', $this->dwoo_data);

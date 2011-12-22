@@ -96,7 +96,7 @@ $bans_class->BanCheck($_SERVER['REMOTE_ADDR'], $board_class->board['name']);
 //      Necessary because otherwise a spambot can just try every possible character until it gets a hit.
 //      This is ported from HydrogenFx - http://www.ohloh.net/p/hydrogenfx
 //
-if($board_class->board['enablecaptcha'] == 1)
+if( ($board_class->board['enablecaptcha'] == 1) && (KU_CAPTCHA_TYPE == 'faptcha') )	// 22/12/11 - only check if using faptcha
 {
 	$results = $tc_db->GetAll("SELECT HIGH_PRIORITY `ip` FROM `" . KU_DBPREFIX . "faptcha_attempts` WHERE `ip` = '" . $_SERVER['REMOTE_ADDR'] . "' LIMIT 10");
 	if (count($results) > 7) // 21/10/11 - No complaints so far so reduced ban threshold from 10 wrong faptchas to 8
