@@ -29,7 +29,7 @@
  */
  
 session_start();	// We are stateful, to prevent recaptcha style bulk pre-solve attack
-error_reporting(E_ALL);	// DEBUG TEMP!
+//error_reporting(E_ALL);	// DEBUG TEMP!
 
 //global $dir;
 //global $files;
