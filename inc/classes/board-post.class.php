@@ -705,7 +705,8 @@ class Board {
 			{
 				// RH - Textbox to type the faptcha answer into = "captcha", calling it this reuses existing validation JS
 				//      Likewise we call the image 'captchaimage' as before
-				$faptcha_image = '<a href="#" onclick="javascript:document.getElementById(\'captchaimage\').src = \''. KU_CGIPATH . '/faptcha.php?\' + Math.random();return false;"> <IMG ID="captchaimage" SRC="'. KU_WEBFOLDER .'faptcha.php" border="0" alt="Click for a new faptcha" title="Click for a new faptcha"> </A>';
+				// 06/01/2012 SRC now also appends random querystring in case of caching issues
+				$faptcha_image = '<a href="#" onclick="javascript:document.getElementById(\'captchaimage\').src = \''. KU_CGIPATH . '/faptcha.php?\' + Math.random();return false;"> <IMG ID="captchaimage" SRC="'. KU_WEBFOLDER .'faptcha.php?'.mt_rand().'" border="0" alt="Click for a new faptcha" title="Click for a new faptcha"> </A>';
 				$faptcha_input = '<BR><input type="text" name="captcha" title="Enter character\'s name (common nicknames accepted ... probably)" size="28" maxlength="75" accesskey="c" />';
 				$this->dwoo_data->assign('faptcha_image', $faptcha_image);	// the faptcha image
 				$this->dwoo_data->assign('faptcha_input', $faptcha_input);	// faptcha answer input textbox

@@ -30,7 +30,9 @@ require 'config.php';
 
 if( KU_CAPTCHA_TYPE == 'faptcha' )
 {
-	include 'faptcha.php';
+	// RH 06/01/2012 - Bug report that dollchan seems to cache stale faptchas, hopefully rand querystring will fix this
+	$faptchaURL =  'faptcha.php?'.mt_rand();
+	header("Location: ".$faptchaURL);
 }
 else if( KU_CAPTCHA_TYPE == 'recaptcha' )
 {
