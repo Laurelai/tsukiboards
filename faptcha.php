@@ -173,6 +173,38 @@ function ImageMangle( $file )
 	// Horizontal flip
 	$image->flopImage();
 
+	// Apply some mild perspective distortion
+	// This one makes the image recede to the right ...
+	if( mt_rand( 0, 1) )
+	{
+		$controlPoints = array( 10, 10,
+					10, 5,
+	 
+					10, $image->getImageHeight() - 20,
+					10, $image->getImageHeight() - 15,
+	 
+					$image->getImageWidth() - 10, 10,
+					$image->getImageWidth() - 10, 15,
+	 
+					$image->getImageWidth() - 10, $image->getImageHeight() - 10,
+					$image->getImageWidth() - 10, $image->getImageHeight() - 15);
+	}
+	else	// and this one to the left
+	{
+		$controlPoints = array( 10, 5,
+					10, 10,
+ 
+					10, $image->getImageHeight() - 15,
+					10, $image->getImageHeight() - 20,
+
+					$image->getImageWidth() - 10, 15, 
+					$image->getImageWidth() - 10, 10,
+	 
+					$image->getImageWidth() - 10, $image->getImageHeight() - 15,
+					$image->getImageWidth() - 10, $image->getImageHeight() - 10 );
+	}
+	$image->distortImage( Imagick::DISTORTION_PERSPECTIVE, $controlPoints, true );
+
 	return $image;
 }
 
