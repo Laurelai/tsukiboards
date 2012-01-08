@@ -174,7 +174,6 @@ if (!$cache_loaded) {
 		$cf['KU_RSS']             = true; // Whether or not to enable the generation of rss for each board and modlog
 		$cf['KU_EXPAND']          = true; // Whether or not to add the expand button to threads viewed on board pages
 		$cf['KU_QUICKREPLY']      = true; // Whether or not to add quick reply links on posts
-		$cf['KU_WATCHTHREADS']    = true; // Whether or not to add thread watching capabilities
 		$cf['KU_FIRSTLAST']       = true; // Whether or not to generate extra files for the first 100 posts/last 50 posts
 		$cf['KU_BLOTTER']         = true; // Whether or not to enable the blotter feature
 		$cf['KU_SITEMAP']         = false; // Whether or not to enable automatic sitemap generation (you will still need to link the search engine sites to the sitemap.xml file)
