@@ -56,18 +56,6 @@
 			<td class="postblock">{$faptcha_image}</td>
 			<td colspan="2">{$faptcha_input}</td>
 		</tr>
-
-	{*
-         * RH - commented this
-		<tr>
-			<td class="postblock'">
-				<a href="#" onclick="javascript:document.getElementById('captchaimage').src = '{%KU_CGIPATH}/captcha.php?' + Math.random();return false;"><img id="captchaimage" src="{%KU_CGIPATH}/captcha.php" border="0" width="90" height="25" alt="Captcha image"></a>
-			</td>
-			<td>
-				<input type="text" name="captcha" size="28" maxlength="10" accesskey="c" />
-			</td>
-		</tr>
-	*}
 	{/if}
 
 	{if $board.uploadtype eq 0 || $board.uploadtype eq 1}
@@ -79,6 +67,8 @@
 			<input type="file" name="imagefile" size="35" accesskey="f" />
 			{if $replythread eq 0 && $board.enablenofile eq 1 }
 				[<input type="checkbox" name="nofile" id="nofile" accesskey="q" /><label for="nofile"> {t}No File{/t}</label>]
+			{else}
+				&nbsp;<span class="postblock"><input type="checkbox" name="spoilerimage" id="spoilerimage" accesskey="r" /><label for="spoilerimage">Spoiler image?</span>
 			{/if}
 			</td>
 		</tr>

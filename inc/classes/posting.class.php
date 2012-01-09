@@ -156,9 +156,9 @@ class Posting {
 				$captchaInput = preg_replace( '/\s/', ' ', $captchaInput );	// ensure whitespace delimiters are a single space
 				$words = explode(" ", $captchaInput, 5);			// max 5 input words (sensible limit? 5*8 worst-case complexity)
 
-				if( ! isset($_SESSION['faptcha_answers']) )	// Seems to happen quite a bit on Chrome, presumably has a shorter default timeout. TODO: try and prevent this.
+				if( ! isset($_SESSION['faptcha_answers']) )	// Session may have timed out, this should be rare unless you have a really low session.gc_maxlifetime though
 				{
-					exitWithErrorPage(_gettext('Session timeout ;_; <A HREF="javascript:history.back();">Please go back</A>'));
+					exitWithErrorPage(_gettext('Session timeout ;_; <A HREF="javascript:history.back();">Please go back</A> and click the faptcha to get a new one'));
 				}
 
 				foreach($_SESSION['faptcha_answers'] as $faptchaAnswerWord)	// For each valid faptcha answer word
@@ -405,6 +405,14 @@ class Posting {
 			}
 		}
 	}
+
+	function IsSpoilerImage() {
+		// RH - return true/false status of "Spoiler image?" checkbox
+		if (isset($_POST['spoilerimage']))
+			return true;
+		return false;
+	}
+
 }
 
 ?>
