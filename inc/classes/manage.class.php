@@ -89,7 +89,53 @@ class Manage {
             $tpl_page .= file_get_contents(KU_ROOTDIR . 'inc/pages/manage_login.html');
         }
     }
+/* Log moderator IP's */
+function LogStaffIP(){
+		global $tc_db;
+		
+		$getlog = $tc_db->GetAll("SELECT HIGH_PRIORITY `iplog` FROM `" . KU_DBPREFIX . "staff` WHERE `username` = " . $tc_db->qstr($_SESSION['manageusername']). " LIMIT 1");
 
+		$ip = $_SERVER['REMOTE_ADDR'];
+			
+		if(filter_var($ip, FILTER_VALIDATE_IP)) {
+							
+			$encip = md5_encrypt($ip, KU_RANDOMSEED);
+							
+			$logevents = 2;
+							
+			if(isset($getlog[0]['iplog'])){
+								
+				$log = $getlog[0]['iplog'];
+								
+				$currentlog = explode('|', $log);
+				
+				foreach($currentlog as $log){
+					if(!isset($log)){
+						unset($log);
+					}
+				}
+								
+				$currentlog[] = $encip;
+						
+				if(count($currentlog)>$logevents){
+					unset($currentlog[0]);
+				} 
+								
+				if(is_array($currentlog)){
+					$log = implode('|', $currentlog);
+				}
+			}
+			else{
+				$log = $encip;
+			}
+								
+			$tc_db->Execute("UPDATE `" . KU_DBPREFIX . "staff` SET `iplog` = ".$tc_db->qstr($log)." WHERE `username` = " . $tc_db->qstr($_SESSION['manageusername']));
+		}
+		
+		return true;
+	}
+	
+	
     /* Check login names and create session if user/pass is correct */
     function CheckLogin() {
         global $tc_db, $action;
@@ -113,6 +159,7 @@ class Manage {
                         $this->SetModerationCookies();
                         $tc_db->Execute("DELETE FROM `" . KU_DBPREFIX . "loginattempts` WHERE `ip` < '" . $_SERVER['REMOTE_ADDR'] . "'");
                         $action = 'posting_rates';
+                        $this->LogStaffIP();
                         management_addlogentry(_gettext('Logged in'), 1);
                         die('<script type="text/javascript">top.location.href = \''. KU_CGIPATH .'/manage.php\';</script>');
                     } else {
@@ -126,6 +173,7 @@ class Manage {
             $_SESSION['token'] = md5($_SESSION['manageusername'] . $_SESSION['managepassword'] . rand(0,100));
                         $this->SetModerationCookies();
                         $action = 'posting_rates';
+                        $this->LogStaffIP();
                         management_addlogentry(_gettext('Logged in'), 1);
                         die('<script type="text/javascript">top.location.href = \''. KU_CGIPATH .'/manage.php\';</script>');
                     } else {
@@ -1036,7 +1084,7 @@ class Manage {
                     </form>
                     <hr /><br />';
 
-        $tpl_page .= '<table border="1" width="100%"><tr><th>'. _gettext('Username') . '</th><th>'. _gettext('Added on') . '</th><th>'. _gettext('Last active') . '</th><th>'. _gettext('Moderating boards') . '</th><th>&nbsp;</th></tr>'. "\n";
+        $tpl_page .= '<table border="1" width="100%"><tr><th>'. _gettext('Username') . '</th><th>'. _gettext('Added on') . '</th><th>'. _gettext('Last active') . '</th><th>IP Log</th><th>'. _gettext('Moderating boards') . '</th><th>&nbsp;</th></tr>'. "\n";
         $i = 1;
         while($i <= 3) {
             if ($i == 1) {
@@ -1049,7 +1097,7 @@ class Manage {
                 $stafftype = 'Janitor';
                 $numtype = 0;
             }
-            $tpl_page .= '<tr><td align="center" colspan="5"><font size="+1"><strong>'. _gettext($stafftype) . '</strong></font></td></tr>'. "\n";
+            $tpl_page .= '<tr><td align="center" colspan="6"><font size="+1"><strong>'. _gettext($stafftype) . '</strong></font></td></tr>'. "\n";
             $results = $tc_db->GetAll("SELECT HIGH_PRIORITY * FROM `" . KU_DBPREFIX . "staff` WHERE `type` = '" .$numtype. "' ORDER BY `username` ASC");
             if (count($results) > 0) {
                 foreach ($results as $line) {
@@ -1060,7 +1108,20 @@ class Manage {
                         $tpl_page .= timeDiff($line['lastactive'], false);
                     } else {
                         $tpl_page .= _gettext('Online now');
+                        
                     }
+                    $tpl_page.='</td><td>';
+					
+	$iplog = explode('|', $line['iplog']);
+					
+	foreach($iplog as $ip){
+					
+		$ip = md5_decrypt($ip,KU_RANDOMSEED);
+					
+		if(filter_var($ip,FILTER_VALIDATE_IP)){
+			$tpl_page.='[<a href="/manage_page.php?action=ipsearch&ip='.$ip.'">'.$ip.'</a>]';
+		}
+	}
                     $tpl_page .= '</td><td>';
                     if ($line['boards'] != '' || $line['type'] == 1) {
                         if ($line['boards'] == 'allboards' || $line['type'] == 1) {
