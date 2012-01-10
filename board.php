@@ -261,7 +261,7 @@ if ($posting_class->CheckValidPost($is_oekaki)) {
 		}
 
 		if ((!isset($_POST['nofile']) && $board_class->board['enablenofile'] == 1) || $board_class->board['enablenofile'] == 0) {
-			$upload_class->HandleUpload();
+			$upload_class->HandleUpload();	// upload file associated with post
 		}
 
 		if ($board_class->board['forcedanon'] == '1') {
