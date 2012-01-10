@@ -491,7 +491,8 @@ if ($posting_class->CheckValidPost($is_oekaki)) {
 	do_redirect(KU_BOARDSPATH . '/' . $board_class->board['name'] . '/');
 	die();
 } elseif (isset($_GET['postoek'])) {
-	$board_class->OekakiHeader($_GET['replyto'], $_GET['postoek']);
+	//not sure if change...
+	$board_class->OekakiHeader(intval($_GET['replyto']), intval($_GET['postoek']));
 	die();
 } else {
 	do_redirect(KU_BOARDSPATH . '/' . $board_class->board['name'] . '/');
