@@ -24,6 +24,7 @@
  */
 /**
  * Board operations which available to all users
+ * (Well, lets hope we can secure these operations, so bots can't access it...
  *
  * This file serves the purpose of providing functionality for all users of the
  * boards. This includes: posting, reporting posts, and deleting posts.
@@ -491,7 +492,7 @@ if ($posting_class->CheckValidPost($is_oekaki)) {
 	do_redirect(KU_BOARDSPATH . '/' . $board_class->board['name'] . '/');
 	die();
 } elseif (isset($_GET['postoek'])) {
-	$board_class->OekakiHeader($_GET['replyto'], $_GET['postoek']);
+	$board_class->OekakiHeader(intval($_GET['replyto']), intval($_GET['postoek']));
 	die();
 } else {
 	do_redirect(KU_BOARDSPATH . '/' . $board_class->board['name'] . '/');
