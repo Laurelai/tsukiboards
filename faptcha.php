@@ -19,8 +19,6 @@
 * kusaba; if not, write to the Free Software Foundation, Inc.,
 * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 *
-* credits to jmyeom for improving this
-*
 */
 /** 
  * Animu Character Image Captcha, Oneechan edition
@@ -33,6 +31,9 @@
 session_start();	// We are stateful, to prevent recaptcha style bulk pre-solve attack
 //error_reporting(E_ALL);	// DEBUG TEMP!
 
+//global $dir;
+//global $files;
+//global $NumFiles;
 $dir = 'faptchas' . '/';	// base images go in here
 $dh  = opendir($dir);
 while (false !== ($filename = readdir($dh))) 
@@ -84,24 +85,25 @@ else if( ".jpg" == substr( $file, -4) || ".jpeg" == substr( $file, -5) )
 function ImageMangle( $file )
 {
 	// Image mangling. This prevents trivial database hash matching, and is supposed to also defend against image recognition services.
-	// Unfortunately it turns out that some of these are quite good ... the below is enough to defeat them most of the time.
+	// Unfortunately it turns out that some of these are quite good ... the below seems to be enough to defeat them.
 	// TODO: Some sort of mild warping? Perspective deformation kind of works ...
 	$image = new Imagick($file);
 	$width = $image->getImageWidth();
 	$height = $image->getImageHeight();
 	
-	// Randomly rotate 8 - 40 degrees one way or the other, random background colour.
-	$bg = new ImagickPixel();
-	$bg->setColor( GetRandomColour() );
+	// Randomly rotate 10 - 35 degrees one way or the other
 	$rotate = 0;
-	$rotate = mt_rand(-40,40);
-	if( $rotate >=0 && $rotate < 7 )
-		$rotate += 8;
-	else if( $rotate <= 0 && $rotate >-7 )
-		$rotate -= 8;
-	$image->rotateImage( $bg, $rotate ); 
+	$rotate = mt_rand(-35,35);
+	if( $rotate >=0 && $rotate < 9 )
+		$rotate += 10;
+	else if( $rotate <= 0 && $rotate >-9 )
+		$rotate -= 10;
+	// $image->rotateImage( $bg, $rotate );
+	$image->rotateImage( new ImagickPixel('none'), $rotate );   // transparent bg
 
 	// Draw 2 random lines as before, thickness also randomised a bit now
+	// Disabled for now, somewhat ugly and I don't think it meaningfully improves security any more?
+	/*
 	$draw = new ImagickDraw();
 	$draw->setStrokeColor( GetRandomColour() );
 	$draw->setStrokeWidth( mt_rand(1,3) );
@@ -110,21 +112,98 @@ function ImageMangle( $file )
 	$draw->setStrokeWidth( mt_rand(1,3) );
 	$draw->line( mt_rand(0, $width), mt_rand(0,$height), mt_rand(0,$width), mt_rand(0,$height) );
 	$image->drawImage( $draw );
+	*/
+
+
+	// Image composition: get a new random faptcha as the background, paste our rotated faptcha on the top.
+	// Idea behind this is to make edge detection harder.
+	global $NumFiles, $dir, $files;		// Get a new faptcha to use as the BG
+
+	// Temporary hack to avoid using PNG for background. This is because it might be transparent.
+	// Real fix is to composite on top of a BG colour but that doesn't work yet, see below ...
+	$done = false;
+	while( ! $done )
+	{
+		$randnum = rand(0, $NumFiles - 1);
+		$bgFaptchaFile = $dir . $files[$randnum];
+		if( pathinfo($bgFaptchaFile, PATHINFO_EXTENSION) != "png" )
+			$done = true;
+	}
+	$bgFaptcha = new Imagick( $bgFaptchaFile );
+	// Set bg colourspace to the same as the foreground faptcha
+	$bgFaptcha->setImageColorspace($image->getImageColorspace() );
+	// BG must also be the same size, or excessive cropping can happen
+	$bgFaptcha->scaleImage( $image->getImageWidth(), $image->getImageHeight() );
+
+	// Cheap background permutation, 50% chance of flipping or flopping
+	if( mt_rand( 0, 1) )
+	{
+		$bgFaptcha->flopImage();
+	}
+	if( mt_rand( 0, 1) )
+	{
+		$bgFaptcha->flipImage();
+	}
+/*	// TODO: improve case where BG image or both have a transparent background (alpha). Below silently doesn't work for some reason.
+	$backgroundColour = new Imagick();
+	$bg = new ImagickPixel();
+	$bg->setColor( GetRandomColour() );
+	$backgroundColour->newImage( $image->getImageWidth(), $image->getImageHeight(), $bg );
+	$backgroundColour->compositeImage( $bgFaptcha, $bgFaptcha->getImageCompose(), 0, 0 );
+	$bgFaptcha = $backgroundColour;
+*/
+	// Faptcha is put on top of the BG one
+	$bgFaptcha->compositeImage($image, $image->getImageCompose(), 0, 0);
+	// Assign back to main faptcha image
+	$image = $bgFaptcha;
+
 
 	// Crop it a bit
-	$image->cropImage( $image->getImageWidth() - 10, $image->getImageHeight() - 10, 5, 5 );
+	$image->cropImage( $image->getImageWidth() - 5, $image->getImageHeight() - 5, 5, 5 );
 
-	// Shrink if neccessary
-	while( $image->getImageWidth() > 110 )
+	// Shrink further if neccessary
+	while( $image->getImageWidth() > 100 )
 	{
-		$newWidth = $image->getImageWidth() * 0.9;
-		$newHeight = $image->getImageHeight() * 0.9;
-		// High quality resize, bigger pics go blurry if we use scaleImage
-		$image->resizeImage( $newWidth, $newHeight, Imagick::FILTER_LANCZOS, 1 );
+		$newWidth = $image->getImageWidth() * 0.95;
+		$newHeight = $image->getImageHeight() * 0.95;
+		// High quality resize, bigger pics go blurry if we use scaleImage (was LANCOZ, this should be faster)
+		$image->resizeImage( $newWidth, $newHeight, Imagick::FILTER_CATROM, 1 );
 	}
 
 	// Horizontal flip
 	$image->flopImage();
+
+	// Apply some mild perspective distortion
+	// This one makes the image recede to the right ...
+	if( mt_rand( 0, 1) )
+	{
+		$controlPoints = array( 10, 10,
+					10, 5,
+	 
+					10, $image->getImageHeight() - 20,
+					10, $image->getImageHeight() - 15,
+	 
+					$image->getImageWidth() - 10, 10,
+					$image->getImageWidth() - 10, 15,
+	 
+					$image->getImageWidth() - 10, $image->getImageHeight() - 10,
+					$image->getImageWidth() - 10, $image->getImageHeight() - 15);
+	}
+	else	// and this one to the left
+	{
+		$controlPoints = array( 10, 5,
+					10, 10,
+ 
+					10, $image->getImageHeight() - 15,
+					10, $image->getImageHeight() - 20,
+
+					$image->getImageWidth() - 10, 15, 
+					$image->getImageWidth() - 10, 10,
+	 
+					$image->getImageWidth() - 10, $image->getImageHeight() - 15,
+					$image->getImageWidth() - 10, $image->getImageHeight() - 10 );
+	}
+	$image->distortImage( Imagick::DISTORTION_PERSPECTIVE, $controlPoints, true );
 
 	return $image;
 }

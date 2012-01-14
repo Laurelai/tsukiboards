@@ -137,25 +137,28 @@ class Posting {
 		/* If the board has captcha's enabled... */
 		if ($board_class->board['enablecaptcha'] == 1) {
 			if ($board_class->board['type'] == 1 && $_POST['replythread']) {
+				// RH - This code related to the original kusaba captchas, which are weak and easily defeated by known spam scripts like threadshitter,
+				// therefore they should never be used.
+				exitWithErrorPage(_gettext('Attempted to use old broken captcha system. Please use reCAPTCHA or the faptcha instead.'));
 
-				// RH - N.B. this code is not active on "normal" imageboards, not sure when it is?
 				/* Check if they entered the correct code. If not... */
-				if ($_SESSION['security_code'] != strtolower($_POST['captcha']) || empty($_SESSION['security_code'])) {
-				 	/* Kill the script, stopping the posting process */
-			 		exitWithErrorPage(_gettext('Incorrect captcha entered.'));
-				}
+				//if ($_SESSION['security_code'] != strtolower($_POST['captcha']) || empty($_SESSION['security_code'])) {
+				// 	/* Kill the script, stopping the posting process */
+			 	//	exitWithErrorPage(_gettext('Incorrect captcha entered.'));
+				//}
 
 			}
-			else {
+			else if( KU_CAPTCHA_TYPE == 'faptcha' ) 
+			{
 				// RH check faptcha words instead
 				$captchaPassed = False;
 				$captchaInput = strtolower($_POST['captcha']);			// get user's captcha answer, lowercase
 				$captchaInput = preg_replace( '/\s/', ' ', $captchaInput );	// ensure whitespace delimiters are a single space
 				$words = explode(" ", $captchaInput, 5);			// max 5 input words (sensible limit? 5*8 worst-case complexity)
 
-				if( ! isset($_SESSION['faptcha_answers']) )	// Seems to happen quite a bit on Chrome, presumably has a shorter default timeout. TODO: try and prevent this.
+				if( ! isset($_SESSION['faptcha_answers']) )	// Session may have timed out, this should be rare unless you have a really low session.gc_maxlifetime though
 				{
-					exitWithErrorPage(_gettext('Session timeout ;_; <A HREF="javascript:history.back();">Please go back</A>'));
+					exitWithErrorPage(_gettext('Session timeout ;_; <A HREF="javascript:history.back();">Please go back</A> and click the faptcha to get a new one'));
 				}
 
 				foreach($_SESSION['faptcha_answers'] as $faptchaAnswerWord)	// For each valid faptcha answer word
@@ -179,10 +182,10 @@ class Posting {
 					session_unset();	// Kill their session upon success. Should stop session reuse attack.
 					session_destroy();
 				}
-
-				
-				/*
-				// RH - temporarily disabled reCAPTCHA
+			}
+			else if( KU_CAPTCHA_TYPE == 'recaptcha' )
+			{
+				// RH - The original reCAPTCHA code. Hopefully this is implemented correctly!
 				require_once(KU_ROOTDIR.'recaptchalib.php');
 				$privatekey = "6LdVg8YSAAAAALayugP2r148EEQAogHPfQOSYow-";
 
@@ -196,9 +199,13 @@ class Posting {
 					// Show error and give user opportunity to try again.
 					exitWithErrorPage(_gettext('Incorrect captcha entered.'));
 				}
-				*/
 			}
-		}
+			else
+			{
+				// Captchas are enabled, but no valid type selected
+				exitWithErrorPage(_gettext('Invalid CAPTCHA type set in config.php (KU_CAPTCHA_TYPE)'));
+			}
+		}//if(captchas enabled)
 	}
 
 	
@@ -398,6 +405,14 @@ class Posting {
 			}
 		}
 	}
+
+	function IsSpoilerImage() {
+		// RH - return true/false status of "Spoiler image?" checkbox
+		if (isset($_POST['spoilerimage']))
+			return true;
+		return false;
+	}
+
 }
 
 ?>

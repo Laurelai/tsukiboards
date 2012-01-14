@@ -35,9 +35,9 @@
 		<td>
 			{strip}<input type="text" name="subject" size="35" maxlength="75" accesskey="s" />&nbsp;<input type="submit" value="
 			{if %KU_QUICKREPLY && $replythread eq 0}
-				{t}Submit{/t}" accesskey="z" />&nbsp;(<span id="posttypeindicator">{t}new thread{/t}</span>)
+				{t}Submit{/t}" accesskey="z" />&nbsp;[<label><input type=checkbox name=spoilerimage>Spoiler Image?</label>]&nbsp;(<span id="posttypeindicator">{t}new thread{/t}</span>)
 			{elseif %KU_QUICKREPLY && $replythread neq 0}
-				{t}Reply{/t}" accesskey="z" />&nbsp;(<span id="posttypeindicator">{t}reply to{/t} <!sm_threadid></span>)
+				{t}Reply{/t}" accesskey="z" />&nbsp;[<label><input type=checkbox name=spoilerimage>Spoiler Image?</label>]&nbsp;(<span id="posttypeindicator">{t}reply to{/t} <!sm_threadid></span>)
 			{else}
 				{t}Submit{/t}" accesskey="z" />
 			{/if}{/strip}
@@ -56,18 +56,6 @@
 			<td class="postblock">{$faptcha_image}</td>
 			<td colspan="2">{$faptcha_input}</td>
 		</tr>
-
-	{*
-         * RH - commented this
-		<tr>
-			<td class="postblock'">
-				<a href="#" onclick="javascript:document.getElementById('captchaimage').src = '{%KU_CGIPATH}/captcha.php?' + Math.random();return false;"><img id="captchaimage" src="{%KU_CGIPATH}/captcha.php" border="0" width="90" height="25" alt="Captcha image"></a>
-			</td>
-			<td>
-				<input type="text" name="captcha" size="28" maxlength="10" accesskey="c" />
-			</td>
-		</tr>
-	*}
 	{/if}
 
 	{if $board.uploadtype eq 0 || $board.uploadtype eq 1}

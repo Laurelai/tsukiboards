@@ -39,7 +39,7 @@ class Upload {
 	var $isreply			= false;
 
 	function HandleUpload() {
-		global $tc_db, $board_class, $is_oekaki, $oekaki;
+		global $tc_db, $board_class, $is_oekaki, $oekaki, $posting_class;
 
 		if (!$is_oekaki) {
 			if ($board_class->board['type'] == 0 || $board_class->board['type'] == 2 || $board_class->board['type'] == 3) {
@@ -159,29 +159,54 @@ class Upload {
 								chmod($this->file_location, 0644);
 
 								if ($_FILES['imagefile']['size'] == filesize($this->file_location)) {
-									if ((!$this->isreply && ($this->imgWidth > KU_THUMBWIDTH || $this->imgHeight > KU_THUMBHEIGHT)) || ($this->isreply && ($this->imgWidth > KU_REPLYTHUMBWIDTH || $this->imgHeight > KU_REPLYTHUMBHEIGHT))) {
-										if (!$this->isreply) {
-											if (!createThumbnail($this->file_location, $this->file_thumb_location, KU_THUMBWIDTH, KU_THUMBHEIGHT)) {
-												exitWithErrorPage(_gettext('Could not create thumbnail.'));
+
+									if( $posting_class->IsSpoilerImage() )
+									{
+										// RH - Spoiler image thumbnailing. Really we should have a single static image path, but for now it's easier to stupidly
+										// create copies with the names other parts of arcNet expect ... I guess it should at least be small (optimised e.g. with pngcrush)
+										$spoiler = KU_ROOTDIR . 'spoiler.png';
+										$spoiler_catalog = KU_ROOTDIR . 'spoiler_catalog.png';
+										copy( $spoiler, $this->file_thumb_location );
+										copy( $spoiler_catalog, $this->file_thumb_cat_location );
+
+										if ( ! $this->isreply ) {
+											$this->imgWidth_thumb = 200;	// Spoiler posted fullsize, as OP of a thread
+											$this->imgHeight_thumb = 162;
+										} else {
+											$this->imgWidth_thumb = 125;	// In-thread images are smaller
+											$this->imgHeight_thumb =  101;
+										}
+										$imageused = true;
+									}
+									else
+									{
+										// Normal thumbnailing
+										if ((!$this->isreply && ($this->imgWidth > KU_THUMBWIDTH || $this->imgHeight > KU_THUMBHEIGHT)) || ($this->isreply && ($this->imgWidth > KU_REPLYTHUMBWIDTH || $this->imgHeight > KU_REPLYTHUMBHEIGHT))) {
+											if (!$this->isreply) {
+												if (!createThumbnail($this->file_location, $this->file_thumb_location, KU_THUMBWIDTH, KU_THUMBHEIGHT)) {
+													exitWithErrorPage(_gettext('Could not create thumbnail.'));
+												}
+											} else {
+												if (!createThumbnail($this->file_location, $this->file_thumb_location, KU_REPLYTHUMBWIDTH, KU_REPLYTHUMBHEIGHT)) {
+													exitWithErrorPage(_gettext('Could not create thumbnail.'));
+												}
 											}
 										} else {
-											if (!createThumbnail($this->file_location, $this->file_thumb_location, KU_REPLYTHUMBWIDTH, KU_REPLYTHUMBHEIGHT)) {
+											if (!createThumbnail($this->file_location, $this->file_thumb_location, $this->imgWidth, $this->imgHeight)) {
 												exitWithErrorPage(_gettext('Could not create thumbnail.'));
 											}
 										}
-									} else {
-										if (!createThumbnail($this->file_location, $this->file_thumb_location, $this->imgWidth, $this->imgHeight)) {
+										if (!createThumbnail($this->file_location, $this->file_thumb_cat_location, KU_CATTHUMBWIDTH, KU_CATTHUMBHEIGHT)) {
 											exitWithErrorPage(_gettext('Could not create thumbnail.'));
 										}
+										$imageDim_thumb = getimagesize($this->file_thumb_location);
+										$this->imgWidth_thumb = $imageDim_thumb[0];
+										$this->imgHeight_thumb = $imageDim_thumb[1];
+										$imageused = true;
 									}
-									if (!createThumbnail($this->file_location, $this->file_thumb_cat_location, KU_CATTHUMBWIDTH, KU_CATTHUMBHEIGHT)) {
-										exitWithErrorPage(_gettext('Could not create thumbnail.'));
-									}
-									$imageDim_thumb = getimagesize($this->file_thumb_location);
-									$this->imgWidth_thumb = $imageDim_thumb[0];
-									$this->imgHeight_thumb = $imageDim_thumb[1];
-									$imageused = true;
-								} else {
+								}
+								else
+								{
 									exitWithErrorPage(_gettext('File was not fully uploaded. Please go back and try again.'));
 								}
 							}

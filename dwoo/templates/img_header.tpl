@@ -1,7 +1,7 @@
 <script type="text/javascript" src="{$cwebpath}lib/javascript/protoaculous-compressed.js"></script>
 <link rel="stylesheet" type="text/css" href="{$cwebpath}css/img_global.css" />
 {loop $ku_styles}
-	<link rel="{if $ neq $__.ku_defaultstyle}alternate {/if}stylesheet" type="text/css" href="{$__.cwebpath}css/{$}.css" title="{$|capitalize}" />
+	<link rel="{if $ neq $__.ku_defaultstyle}alternate {/if}stylesheet" type="text/css" id='stylesheet' href="{$__.cwebpath}css/{$}.css" title="{$|capitalize}" />
 {/loop}
 {if $locale eq 'ja'}
 	{literal}
@@ -32,8 +32,10 @@ kusaba = \{};
 kusaba.val = 0;
 kusaba.loopid;
 </script>
+
 <script type="text/javascript" src="{%KU_WEBFOLDER}lib/javascript/jquery-1.6.2.min.js"></script>  <!-- RH jQuery must be loaded first now since kusaba.js uses it -->
 <script type="text/javascript" src="{%KU_WEBPATH}/lib/javascript/kusaba.js"></script>
+
 <script type="text/javascript"><!--
 	var hiddenthreads = getCookie('hiddenthreads').split('!');
 //--></script>
@@ -57,9 +59,7 @@ kusaba.loopid;
 		-&nbsp;
 	{/if}
 {/if}
-{if %KU_WATCHTHREADS}
-	[<a href="#" onclick="javascript:showwatchedthreads();return false" title="{t}Watched Threads{/t}">WT</a>]&nbsp;
-{/if}
+
 [<a href="{%KU_WEBPATH}" target="_top">{t}Home{/t}</a>]&nbsp;[<a href="{%KU_CGIPATH}/manage.php" target="_top">{t}Manage{/t}</a>]
 </div>
 <div class="navbar">
@@ -77,19 +77,7 @@ kusaba.loopid;
 	{/if}
 {/if}
 </div>
-{if %KU_WATCHTHREADS && not $isoekaki && not $hidewatchedthreads}
-				<script type="text/javascript"><!--
-				if (getCookie('showwatchedthreads') == '1') {
-				document.write('<div id="watchedthreads" style="top: {$ad_top}px; left: 25px;" class="watchedthreads"><div class="postblock" id="watchedthreadsdraghandle" style="width: 100%;">{t}Watched Threads{/t}<\/div><span id="watchedthreadlist"><\/span><div id="watchedthreadsbuttons"><a href="#" onclick="javascript:hidewatchedthreads();return false;" title="{t}Hide the watched threads box{/t}"><img src="{$cwebpath}css/icons/blank.gif" border="0" class="hidewatchedthreads" alt="hide" /><\/a>&nbsp;<a href="#" onclick="javascript:getwatchedthreads(\'0\', \'{$board.name}\');return false;" title="{t}Refresh watched threads{/t}"><img src="{$cwebpath}css/icons/blank.gif" border="0" class="refreshwatchedthreads" alt="refresh" /><\/a><\/div><\/div>');
-				watchedthreadselement = document.getElementById('watchedthreads');
-				watchedthreadselement.style.top = getCookie('watchedthreadstop');
-				watchedthreadselement.style.left = getCookie('watchedthreadsleft');
-				watchedthreadselement.style.width = Math.max(250,getCookie('watchedthreadswidth')) + 'px';
-				watchedthreadselement.style.height = Math.max(75,getCookie('watchedthreadsheight')) + 'px';
-				getwatchedthreads('<!sm_threadid>', '{$board.name}');
-			}
-			//--></script>
-{/if}
+
 
 <div class="logo">
 {if %KU_HEADERURL neq '' && $board.image eq ''}

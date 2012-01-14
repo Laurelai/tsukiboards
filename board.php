@@ -97,7 +97,7 @@ $bans_class->BanCheck($_SERVER['REMOTE_ADDR'], $board_class->board['name']);
 //      Necessary because otherwise a spambot can just try every possible character until it gets a hit.
 //      This is ported from HydrogenFx - http://www.ohloh.net/p/hydrogenfx
 //
-if($board_class->board['enablecaptcha'] == 1)
+if( ($board_class->board['enablecaptcha'] == 1) && (KU_CAPTCHA_TYPE == 'faptcha') )	// 22/12/11 - only check if using faptcha
 {
 	$results = $tc_db->GetAll("SELECT HIGH_PRIORITY `ip` FROM `" . KU_DBPREFIX . "faptcha_attempts` WHERE `ip` = '" . $_SERVER['REMOTE_ADDR'] . "' LIMIT 10");
 	if (count($results) > 7) // 21/10/11 - No complaints so far so reduced ban threshold from 10 wrong faptchas to 8
@@ -262,7 +262,7 @@ if ($posting_class->CheckValidPost($is_oekaki)) {
 		}
 
 		if ((!isset($_POST['nofile']) && $board_class->board['enablenofile'] == 1) || $board_class->board['enablenofile'] == 0) {
-			$upload_class->HandleUpload();
+			$upload_class->HandleUpload();	// upload file associated with post
 		}
 
 		if ($board_class->board['forcedanon'] == '1') {
@@ -403,15 +403,9 @@ if ($posting_class->CheckValidPost($is_oekaki)) {
 			}
 		}
 
-		// If the user replied to a thread he is watching, update it so it doesn't count his reply as unread
-		if (KU_WATCHTHREADS && $thread_replyto != '0') {
-			$viewing_thread_is_watched = $tc_db->GetOne("SELECT COUNT(*) FROM `" . KU_DBPREFIX . "watchedthreads` WHERE `ip` = '" . $_SERVER['REMOTE_ADDR'] . "' AND `board` = '" . $board_class->board['name'] . "' AND `threadid` = '" . $thread_replyto . "'");
-			if ($viewing_thread_is_watched > 0) {
-				$newestreplyid = $tc_db->GetOne('SELECT `id` FROM `'.KU_DBPREFIX.'posts` WHERE `boardid` = ' . $board_class->board['id'] . ' AND `IS_DELETED` = 0 AND `parentid` = '.$thread_replyto.' ORDER BY `id` DESC LIMIT 1');
 
-				$tc_db->Execute("UPDATE `" . KU_DBPREFIX . "watchedthreads` SET `lastsawreplyid` = " . $newestreplyid . " WHERE `ip` = '" . $_SERVER['REMOTE_ADDR'] . "' AND `board` = '" . $board_class->board['name'] . "' AND `threadid` = '" . $thread_replyto . "'");
-			}
-		}
+		// RH 08/01/2012 - Server-side thread watching removed due to DoS / being stupid, users should use Dollchan Extension Tools or equivalent instead
+
 
 		$tc_db->Execute("COMMIT");
 

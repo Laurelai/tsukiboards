@@ -174,7 +174,6 @@ if (!$cache_loaded) {
 		$cf['KU_RSS']             = true; // Whether or not to enable the generation of rss for each board and modlog
 		$cf['KU_EXPAND']          = true; // Whether or not to add the expand button to threads viewed on board pages
 		$cf['KU_QUICKREPLY']      = true; // Whether or not to add quick reply links on posts
-		$cf['KU_WATCHTHREADS']    = true; // Whether or not to add thread watching capabilities
 		$cf['KU_FIRSTLAST']       = true; // Whether or not to generate extra files for the first 100 posts/last 50 posts
 		$cf['KU_BLOTTER']         = true; // Whether or not to enable the blotter feature
 		$cf['KU_SITEMAP']         = false; // Whether or not to enable automatic sitemap generation (you will still need to link the search engine sites to the sitemap.xml file)
@@ -208,6 +207,9 @@ if (!$cache_loaded) {
 		$cf['ROBOT_BOARD'] = '';				// What board should use the robot (currently only 1 board because PHP is derp)
 		$cf['TSUKI_BANREASONS'] = serialize(array("Porn Spam" => "Porn Spam", "Spam" => "Spam", "CP" => "Child Pornography", "IC" => "Illegal Content", "Proxy" => "Proxy"));
 
+	// Captcha / Faptcha options
+		$cf['KU_CAPTCHA_TYPE'] = 'faptcha';	// Set to 'recaptcha' for reCAPTCHA, or 'faptcha' for an image recognition challenge (default is anime characters)
+		
 	// Post-configuration actions, don't modify these
 	// Please make sure the correct revision number is labled, it makes me sad when it isn't. 
 		$cf['KU_VERSION']    = '42';
