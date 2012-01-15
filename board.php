@@ -24,6 +24,7 @@
  */
 /**
  * Board operations which available to all users
+ * (Well, lets hope we can secure these operations, so bots can't access it...
  *
  * This file serves the purpose of providing functionality for all users of the
  * boards. This includes: posting, reporting posts, and deleting posts.

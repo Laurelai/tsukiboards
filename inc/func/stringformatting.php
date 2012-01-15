@@ -64,11 +64,11 @@ function formatDate($timestamp, $type = 'post', $locale = 'en', $email = '') {
 			return $output.$fulldate.(($email != '') ? ('</a>') : (""));
 		} else {
 			/* Format the timestamp english style */
-			return $output.date('y/m/d(D)H:i', $timestamp).(($email != '') ? ('</a>') : (""));
+			return $output.date(KU_DATEFORMAT, $timestamp).(($email != '') ? ('</a>') : (""));
 		}
 	}
 
-	return $output.date('y/m/d(D)H:i', $timestamp).(($email != '') ? ('</a>') : (""));
+	return $output.date(KU_DATEFORMAT, $timestamp).(($email != '') ? ('</a>') : (""));
 }
 
 /**
