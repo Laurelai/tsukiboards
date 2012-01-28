@@ -244,7 +244,7 @@ if ($posting_class->CheckValidPost($is_oekaki)) {
 	}
         // RBL check on poster's IP, ban them if they're using an open proxy ~ Aurora
 	if($listed = rblcheck($_SERVER['REMOTE_ADDR'])) { 
-		$bans_class->BanUser($_SERVER['REMOTE_ADDR'], 'SERVER', 0, 1200, $_POST['board'], "listed in $listed as proxy", 500, 0, 1);
+		$bans_class->BanUser($_SERVER['REMOTE_ADDR'], 'SERVER', 0, 604800, $_POST['board'], "listed in $listed as proxy", 500, 0, 1);
 		exitWithErrorPage("Your IP is listed in ".$listed." as an open proxy and has been banned.\n"); 
 
 	}
