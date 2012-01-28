@@ -9,7 +9,17 @@ function changeLocale($newlocale) {
 	_bind_textdomain_codeset('kusaba', KU_CHARSET);
 
 }
-
+function rblcheck($host) {
+	$rbls = array('sbl-xbl.spamhaus.org', 'rbl.efnet.org', 'cbl.abuseat.org');
+	foreach($rbls as $rbl) {
+		$lookup = implode('.', array_reverse(explode('.', $host))) . '.' . $rbl;
+		if (strstr(gethostbyname($lookup), "127.0.0")) {
+			return $rbl;
+		} 
+	}
+	return 0;
+}
+$userip = $_SERVER["REMOTE_ADDR"];
 function exitWithErrorPage($errormsg, $extended = '') {
 	global $dwoo, $dwoo_data, $board_class;
 	if (!isset($dwoo)) {
