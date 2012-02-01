@@ -231,7 +231,6 @@ if ($posting_class->CheckValidPost($is_oekaki)) {
 	$posting_class->CheckBadUnicode($post_name, $post_email, $post_subject, $post_message);
 
 	$post_tag = $posting_class->GetPostTag();
-
 	if ($post_isreply) {
 		if ($imagefile_name == '' && !$is_oekaki && $post_message == '') {
 			exitWithErrorPage(_gettext('An image, or message, is required for a reply.'));
@@ -243,7 +242,14 @@ if ($posting_class->CheckValidPost($is_oekaki)) {
 			}
 		}
 	}
+        // RBL check on poster's IP, ban them if they're using an open proxy ~ Aurora
+        if($cf['KU_RBLCHECK']) {
+		if($listed = rblcheck($_SERVER['REMOTE_ADDR'])) { 
+			$bans_class->BanUser($_SERVER['REMOTE_ADDR'], 'SERVER', 0, 604800, $_POST['board'], "listed in $listed as proxy", 500, 0, 1);
+			exitWithErrorPage("Your IP is listed in ".$listed." as an open proxy and has been banned.\n"); 
 
+		}
+	}
 	if (isset($_POST['nofile'])&&$board_class->board['enablenofile']==1) {
 		if ($post_message == '') {
 			exitWithErrorPage('A message is required to post without a file.');
