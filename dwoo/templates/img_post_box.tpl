@@ -35,9 +35,9 @@
 		<td>
 			{strip}<input type="text" name="subject" size="35" maxlength="75" accesskey="s" />&nbsp;<input type="submit" value="
 			{if %KU_QUICKREPLY && $replythread eq 0}
-				{t}Submit{/t}" accesskey="z" />&nbsp;[<label><input type=checkbox name=spoilerimage>Spoiler Image?</label>]&nbsp;(<span id="posttypeindicator">{t}new thread{/t}</span>)
+				{t}Submit{/t}" accesskey="z" />&nbsp;(<span id="posttypeindicator">{t}new thread{/t}</span>)
 			{elseif %KU_QUICKREPLY && $replythread neq 0}
-				{t}Reply{/t}" accesskey="z" />&nbsp;[<label><input type=checkbox name=spoilerimage>Spoiler Image?</label>]&nbsp;(<span id="posttypeindicator">{t}reply to{/t} <!sm_threadid></span>)
+				{t}Reply{/t}" accesskey="z" />&nbsp;(<span id="posttypeindicator">{t}reply to{/t} <!sm_threadid></span>)
 			{else}
 				{t}Submit{/t}" accesskey="z" />
 			{/if}{/strip}
@@ -67,6 +67,8 @@
 			<input type="file" name="imagefile" size="35" accesskey="f" />
 			{if $replythread eq 0 && $board.enablenofile eq 1 }
 				[<input type="checkbox" name="nofile" id="nofile" accesskey="q" /><label for="nofile"> {t}No File{/t}</label>]
+			{else}
+				&nbsp;<span class="postblock"><input type="checkbox" name="spoilerimage" id="spoilerimage" accesskey="r" /><label for="spoilerimage">Spoiler image?</span>
 			{/if}
 			</td>
 		</tr>
