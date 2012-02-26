@@ -31,9 +31,6 @@
 session_start();	// We are stateful, to prevent recaptcha style bulk pre-solve attack
 //error_reporting(E_ALL);	// DEBUG TEMP!
 
-//global $dir;
-//global $files;
-//global $NumFiles;
 $dir = 'faptchas' . '/';	// base images go in here
 $dh  = opendir($dir);
 while (false !== ($filename = readdir($dh))) 
@@ -86,7 +83,6 @@ function ImageMangle( $file )
 {
 	// Image mangling. This prevents trivial database hash matching, and is supposed to also defend against image recognition services.
 	// Unfortunately it turns out that some of these are quite good ... the below seems to be enough to defeat them.
-	// TODO: Some sort of mild warping? Perspective deformation kind of works ...
 	$image = new Imagick($file);
 	$width = $image->getImageWidth();
 	$height = $image->getImageHeight();
@@ -159,15 +155,12 @@ function ImageMangle( $file )
 
 
 	// Crop it a bit
-	$image->cropImage( $image->getImageWidth() - 5, $image->getImageHeight() - 5, 5, 5 );
+	$image->cropImage( $image->getImageWidth() - 10, $image->getImageHeight() - 10, 10, 10 );
 
 	// Shrink further if neccessary
-	while( $image->getImageWidth() > 100 )
+	if( $image->getImageWidth() > 100 )
 	{
-		$newWidth = $image->getImageWidth() * 0.95;
-		$newHeight = $image->getImageHeight() * 0.95;
-		// High quality resize, bigger pics go blurry if we use scaleImage (was LANCOZ, this should be faster)
-		$image->resizeImage( $newWidth, $newHeight, Imagick::FILTER_CATROM, 1 );
+		$image->scaleImage( 100, $image->getImageHeight() * (100/$image->getImageWidth()) );
 	}
 
 	// Horizontal flip
