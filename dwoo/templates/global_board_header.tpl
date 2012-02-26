@@ -11,3 +11,7 @@
 <meta http-equiv="expires" content="Sat, 17 Mar 1990 00:00:01 GMT" />
 <meta http-equiv="Content-Type" content="text/html;charset={%KU_CHARSET}" />
 <script type="text/javascript" src="{$cwebpath}/lib/javascript/gettext.js"></script>
+<!-- lets try this as a mobile viewer. -->
+<meta name="viewport" content="width=device-width; initial-scale=1.0">
+<!-- This may not work on other devices, but it does on iPhones. Please improve.-->
+<!--<meta name="viewport" content="width=320" />-->
