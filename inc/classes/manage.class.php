@@ -2428,7 +2428,7 @@ function LogStaffIP(){
         $menu_class = new Menu();
         $menu_class->Generate();
         $tpl_page .=  _gettext('Regenerated menu pages') .'<br />';
-        $tpl_page .= sprintf(_gettext('Rebuild complete. Took <strong>%d</strong> seconds.'), time() - $time_start);
+        $tpl_page .= sprintf(_gettext('Great Success! It only took <strong>%d</strong> seconds to rebuild.'), time() - $time_start);
         management_addlogentry(_gettext('Rebuilt all boards and threads'), 2);
         unset($board_class);
     }
