@@ -589,6 +589,34 @@ function LogStaffIP(){
                     '<input type="submit" value="'. _gettext('Submit') .'" />'. "\n" .
                     '</form>'. "\n";
         }
+
+        # SQL Dumper
+        function sqldump() {
+                global $tc_db, $tpl_page;
+                $this->AdministratorsOnly();
+                $tpl_page .= '<h2>' . _gettext('Execute a MySQL dump') . '</h2><br />';
+                $tpl_page .= '<table width="400px"><tr><td>Connecting to server...</td><td>';
+                $con = mysql_connect(KU_DBHOST, KU_DBUSERNAME, KU_DBPASSWORD);
+                if (!$con) {
+                        $tpl_page .= '[&nbsp;<span style="color:#FF0000">FAILED</span>&nbsp;]</td></tr><tr><td colspan="2">' . mysql_error() . '</td></tr></table><br /><br />A dump cannot be taken until connection error(s) are corrected.';
+                } else {
+                        $tpl_page .= '[&nbsp;&nbsp;&nbsp;<span style="color:#00FF00">OK</span>&nbsp;&nbsp;&nbsp;]</td></tr><tr><td>Connecting to database...</td><td>';
+                        $db_selected = mysql_select_db(KU_DBDATABASE, $con);
+                        if (!$db_selected) {
+                                $tpl_page .= '[&nbsp;<span style="color:#FF0000">FAILED</span>&nbsp;]</td></tr><tr><td colspan="2">' . mysql_error() . '</td></tr></table><br /><br />A dump cannot be taken until database error(s) are corrected.';
+                        } else {
+                                $tpl_page .= '[&nbsp;&nbsp;&nbsp;<span style="color:#00FF00">OK</span>&nbsp;&nbsp;&nbsp;]</td></tr></table><br /><br />A dump can be taken.&nbsp;&nbsp;&nbsp;[&nbsp;<a href="manage_page.php?action=sqldump&dump=1">Execute</a>&nbsp;]';
+                        }
+                }
+
+                if (isset($_GET['dump'])) {
+                        header('Content-type: text/plain');
+                        header('Content-Disposition: attachment; filename="' . date('Y') . '.' . date('m') . '.' . date ('d') . '.http@www' . KU_DOMAIN . '.sql"');
+                        _mysqldump($db_selected);
+                        die();
+                }
+        }		
+		
 /* Add, edit, delete, and view news entries */
     function news() {
         global $tc_db, $tpl_page;
@@ -4471,5 +4499,104 @@ print "</table>";
 	HTML:<br /><textarea cols="80" rows="15" name="message">'.$message.'</textarea><input type="hidden" name="thread" value="'.$parentid.'" /><br /><input type="submit" name="edit" value="Edit" /></form>';
 }
 }
-?>
 
+function _mysqldump($mysql_database)
+{
+	$sql="show tables;";
+	$result= mysql_query($sql);
+	if( $result)
+	{
+		while( $row= mysql_fetch_row($result))
+		{
+			_mysqldump_table_structure($row[0]);
+			_mysqldump_table_data($row[0]);
+			
+		}
+	}
+	else
+	{
+		echo "/* no tables in $mysql_database */\n";
+	}
+	mysql_free_result($result);
+}
+
+function _mysqldump_table_structure($table)
+{
+	echo "/* Table structure for table `$table` */\n";
+	echo "DROP TABLE IF EXISTS `$table`;\n\n";
+		$sql="show create table `$table`; ";
+		$result=mysql_query($sql);
+		if( $result)
+		{
+			if($row= mysql_fetch_assoc($result))
+			{
+				echo $row['Create Table'].";\n\n";
+			}
+		}
+		mysql_free_result($result);
+}
+
+function _mysqldump_table_data($table)
+{
+	$sql="select * from `$table`;";
+	$result=mysql_query($sql);
+	if( $result)
+	{
+		$num_rows= mysql_num_rows($result);
+		$num_fields= mysql_num_fields($result);
+
+		if( $num_rows > 0)
+		{
+			echo "/* dumping data for table `$table` */\n";
+
+			$field_type=array();
+			$i=0;
+			while( $i < $num_fields)
+			{
+				$meta= mysql_fetch_field($result, $i);
+				array_push($field_type, $meta->type);
+				$i++;
+			}
+
+			//print_r( $field_type);
+			echo "insert into `$table` values\n";
+			$index=0;
+			while( $row= mysql_fetch_row($result))
+			{
+				echo "(";
+				for( $i=0; $i < $num_fields; $i++)
+				{
+					if( is_null( $row[$i]))
+						echo "null";
+					else
+					{
+						switch( $field_type[$i])
+						{
+							case 'int':
+								echo $row[$i];
+								break;
+							case 'string':
+							case 'blob' :
+							default:
+								echo "'".mysql_real_escape_string($row[$i])."'";
+						}
+					}
+					if( $i < $num_fields-1)
+						echo ",";
+				}
+				echo ")";
+
+				if( $index < $num_rows-1)
+					echo ",";
+				else
+					echo ";";
+				echo "\n";
+
+				$index++;
+			}
+		}
+	}
+	mysql_free_result($result);
+	echo "\n";
+}
+?>

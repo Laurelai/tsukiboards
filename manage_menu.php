@@ -105,7 +105,8 @@ if (!$manage_class->ValidateSession(true)) {
         <li><a href="manage_page.php?action=modlog">' . _gettext('ModLog') . '</a></li>
         <li><a href="manage_page.php?action=sql">' . _gettext('SQL query') . '</a></li>
         <li><a href="manage_page.php?action=cleanup">' . _gettext('Cleanup') . '</a></li>
-        <li><a href="manage_page.php?action=rebuildall">' . _gettext('Rebuild HTML') . '</a></li>' . "\n";
+        <li><a href="manage_page.php?action=rebuildall">' . _gettext('Rebuild HTML') . '</a></li>
+		<li><a href="manage_page.php?action=sqldump">' . gettext('Download SQL Dump') . '</a></li>' . "\n";
         if (KU_APC) $tpl_links .= '<li><a href="manage_page.php?action=apc">APC</a></li>
         </ul></div>';
         $tpl_links .= section_html(_gettext('Content Administration'), 'contadministration') .
