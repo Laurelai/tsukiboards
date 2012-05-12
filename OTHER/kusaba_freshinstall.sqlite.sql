@@ -329,8 +329,8 @@ CREATE TABLE PREFIX_staff (
   type smallint NOT NULL default '0',
   boards text,
   addedon int NOT NULL,
-  lastactive int NOT NULL default '0'
-  iplog text NOT NULL,
+  lastactive int NOT NULL default '0',
+  iplog text NOT NULL
   
 );
 
