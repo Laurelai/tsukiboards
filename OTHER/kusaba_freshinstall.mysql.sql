@@ -329,6 +329,7 @@ CREATE TABLE `PREFIX_staff` (
   `boards` text,
   `addedon` int(20) NOT NULL,
   `lastactive` int(20) NOT NULL default '0',
+  `iplog` text NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 

@@ -337,6 +337,7 @@ CREATE TABLE PREFIX_staff (
   boards text,
   addedon int NOT NULL,
   lastactive int NOT NULL default '0',
+  iplog text NOT NULL,
   PRIMARY KEY (id)
 );
 
