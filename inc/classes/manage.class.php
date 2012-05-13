@@ -1163,7 +1163,7 @@ function LogStaffIP(){
                     $tpl_page .= '</td><td>[<a href="?action=staff&edit='. $line['id'] . '">'. _gettext('Edit') . '</a>] [<a href="?action=staff&del='. $line['id'] . '">'. _gettext('Delete') .'</a>]</td></tr>'. "\n";
                 }
             } else {
-                $tpl_page .= '<tr><td colspan="5">'. _gettext('None') . '</td></tr>'. "\n";
+                $tpl_page .= '<tr><td colspan="6">'. _gettext('None') . '</td></tr>'. "\n";
             }
             $i++;
         }
